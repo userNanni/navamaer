@@ -10,16 +10,18 @@ export default function HomeScreen() {
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
       headerImage={
         <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
+          source={require("@/assets/images/banner.jpg")}
+          style={styles.bannerImage}
         />
       }
     >
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Navamaer</ThemedText>
+        <Image
+          source={require("@/assets/images/Logo_Site_Transparente.webp")}
+          style={styles.navamaerLogo}
+        />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
           Edit{" "}
           <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
@@ -56,20 +58,18 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+  bannerImage: { width: "100%", height: "100%", objectFit: "cover" },
   titleContainer: {
-    flexDirection: "row",
     alignItems: "center",
-    gap: 8,
   },
   stepContainer: {
     gap: 8,
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
+  navamaerLogo: {
+    height: 80,
+    width: 400,
     bottom: 0,
     left: 0,
-    position: "absolute",
   },
 });
