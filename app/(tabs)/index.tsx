@@ -3,11 +3,16 @@ import { Image, StyleSheet, Platform } from "react-native";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { Colors } from "@/constants/Colors";
 
 export default function HomeScreen() {
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
+      backBackgroundColor={{
+        light: Colors.light.background,
+        dark: Colors.dark.background,
+      }}
       headerImage={
         <Image
           source={require("@/assets/images/banner.jpg")}
@@ -16,6 +21,7 @@ export default function HomeScreen() {
       }
     >
       <ThemedView style={styles.titleContainer}>
+        {/* trocar essa logo para a vetorial dela e mudar a fonte para ser reativa ao tema */}
         <Image
           source={require("@/assets/images/Logo_Site_Transparente.webp")}
           style={styles.navamaerLogo}

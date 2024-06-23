@@ -1,12 +1,20 @@
-import { Image, StyleSheet, useWindowDimensions } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  type TextProps,
+  useWindowDimensions,
+  useColorScheme,
+} from "react-native";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import HTMLRender from "react-native-render-html";
+import { Colors } from "@/constants/Colors";
 
 interface newsTypes {
+  index?: string;
   collectionId: string;
   collectionName: string;
   created: string;
@@ -21,6 +29,7 @@ interface newsTypes {
 
 export default function Article() {
   const {
+    index,
     collectionId,
     collectionName,
     created,
@@ -32,10 +41,22 @@ export default function Article() {
     body,
     updated,
   } = useLocalSearchParams<newsTypes>();
+
   const { width } = useWindowDimensions();
+
+  const colorScheme = useColorScheme();
+
+  const themeInnerHTMLStyle =
+    colorScheme === "light"
+      ? styles.innerHTMLLightTheme
+      : styles.innerHTMLDarkTheme;
+
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
+      headerBackgroundColor={{
+        light: Colors.light.background,
+        dark: Colors.dark.background,
+      }}
       headerImage={
         <Image
           source={{
@@ -60,7 +81,11 @@ export default function Article() {
       </ThemedView>
       <ThemedView>
         <ThemedText>
-          <HTMLRender contentWidth={width} source={{ html: body }} />
+          <HTMLRender
+            baseStyle={themeInnerHTMLStyle}
+            contentWidth={width}
+            source={{ html: body }}
+          />
         </ThemedText>
       </ThemedView>
     </ParallaxScrollView>
@@ -84,5 +109,11 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: "absolute",
+  },
+  innerHTMLDarkTheme: {
+    color: "#ECEDEE",
+  },
+  innerHTMLLightTheme: {
+    color: "#11181C",
   },
 });

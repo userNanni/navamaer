@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 import { Link } from "expo-router";
 import PocketBase from "pocketbase";
 import { FlashList } from "@shopify/flash-list";
+import { PBLink } from "@/app/databaselink";
 
-const pb = new PocketBase("https://simplyheron.fly.dev");
+
+const pb = new PocketBase(PBLink);
 
 interface newsTypes {
   collectionId: string;
@@ -23,10 +25,14 @@ interface newsTypes {
 
 export default function News() {
   const fetchData = async () => {
-    const records = await pb.collection("news").getFullList<newsTypes>({
-      sort: "-created",
-    });
-    setNews(records);
+    try {
+      const records = await pb.collection("news").getFullList<newsTypes>({
+        sort: "-created",
+      });
+      setNews(records);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
