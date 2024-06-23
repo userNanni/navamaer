@@ -12,24 +12,10 @@ import { ThemedView } from "@/components/ThemedView";
 import { Stack, useLocalSearchParams } from "expo-router";
 import HTMLRender from "react-native-render-html";
 import { Colors } from "@/constants/Colors";
-
-interface newsTypes {
-  index?: string;
-  collectionId: string;
-  collectionName: string;
-  created: string;
-  id: string;
-  topic: string;
-  title: string;
-  img: string;
-  author: string;
-  body: any;
-  updated: string;
-}
+import { newsTypes } from ".//index";
 
 export default function Article() {
   const {
-    index,
     collectionId,
     collectionName,
     created,

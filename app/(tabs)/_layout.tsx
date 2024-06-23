@@ -52,6 +52,18 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="sports"
+        options={{
+          title: "Podium",
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? "trophy" : "trophy-outline"}
+              color={color}
+            />
+          ),
+        }}
+      />
     </Tabs>
   );
 }

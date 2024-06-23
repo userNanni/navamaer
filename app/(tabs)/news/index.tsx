@@ -7,10 +7,9 @@ import PocketBase from "pocketbase";
 import { FlashList } from "@shopify/flash-list";
 import { PBLink } from "@/app/databaselink";
 
-
 const pb = new PocketBase(PBLink);
 
-interface newsTypes {
+export interface newsTypes {
   collectionId: string;
   collectionName: string;
   created: string;
