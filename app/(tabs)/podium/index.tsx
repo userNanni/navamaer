@@ -11,35 +11,14 @@ import PocketBase from "pocketbase";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { PBLink } from "../../databaselink";
+import { PBLink } from "@/assets/types_methods/databaselink";
+import {
+  compare,
+  escolasTypes,
+  pointsTypes,
+} from "@/assets/types_methods/types";
 
 const pb = new PocketBase(PBLink);
-
-export interface pointsTypes {
-  collectionId: string;
-  collectionName: string;
-  created: string;
-  escola: string;
-  id: string;
-  modalidade: string;
-  pontos: number;
-  updated: string;
-}
-export interface escolasTypes {
-  id: number;
-  name: string;
-  pointsTotal: number;
-}
-
-function compare(a: escolasTypes, b: escolasTypes) {
-  if (a.pointsTotal < b.pointsTotal) {
-    return 1;
-  }
-  if (a.pointsTotal > b.pointsTotal) {
-    return -1;
-  }
-  return 0;
-}
 
 export default function Podium() {
   const fetchData = async () => {
@@ -63,7 +42,7 @@ export default function Podium() {
 
   const [points, setPoints] = useState<pointsTypes[]>([]);
 
-  const escolas = [
+  const escolas: escolasTypes[] = [
     {
       id: 1,
       name: "AFA",

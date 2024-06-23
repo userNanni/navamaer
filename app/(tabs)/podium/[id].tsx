@@ -3,12 +3,11 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import PocketBase from "pocketbase";
 import { Stack, useLocalSearchParams } from "expo-router";
-import { PBLink } from "../../databaselink";
-import { pointsTypes } from ".//index";
-   
+import { PBLink } from "../../../assets/types_methods/databaselink";
+
 const pb = new PocketBase(PBLink);
 
-import { escolasTypes } from ".//index";
+import { pointsTypes, escolasTypes } from "@/assets/types_methods/types";
 import { useEffect, useState } from "react";
 import { FlashList } from "@shopify/flash-list";
 

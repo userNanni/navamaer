@@ -11,35 +11,12 @@ import PocketBase from "pocketbase";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { PBLink } from "../../databaselink";
+
+import { PBLink } from "@/assets/types_methods/databaselink";
+
+import { pointsTypes } from "@/assets/types_methods/types";
 
 const pb = new PocketBase(PBLink);
-
-export interface pointsTypes {
-  collectionId: string;
-  collectionName: string;
-  created: string;
-  escola: string;
-  id: string;
-  modalidade: string;
-  pontos: number;
-  updated: string;
-}
-export interface escolasTypes {
-  id: number;
-  name: string;
-  pointsTotal: number;
-}
-
-function compare(a: escolasTypes, b: escolasTypes) {
-  if (a.pointsTotal < b.pointsTotal) {
-    return 1;
-  }
-  if (a.pointsTotal > b.pointsTotal) {
-    return -1;
-  }
-  return 0;
-}
 
 export default function Podium() {
   const fetchData = async () => {
@@ -63,61 +40,30 @@ export default function Podium() {
 
   const [points, setPoints] = useState<pointsTypes[]>([]);
 
-  const escolas = [
-    {
-      id: 1,
-      name: "AFA",
-      pointsTotal: points.reduce(function (acc, src) {
-        return src.escola == "AFA" ? acc + src.pontos : acc;
-      }, 0),
-    },
-    {
-      id: 2,
-      name: "EN",
-      pointsTotal: points.reduce(function (acc, src) {
-        return src.escola == "EN" ? acc + src.pontos : acc;
-      }, 0),
-    },
-    {
-      id: 3,
-      name: "AMAN",
-      pointsTotal: points.reduce(function (acc, src) {
-        return src.escola == "AMAN" ? acc + src.pontos : acc;
-      }, 0),
-    },
-  ].sort(compare);
-
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
-      headerImage={
-        <Ionicons size={200} name="trophy" style={styles.headerImage} />
-      }
+    <ThemedView
+      style={{
+        paddingTop: 64,
+        flex: 1,
+        padding: 32,
+        gap: 16,
+        overflow: "hidden",
+      }}
     >
-      <ThemedText type="title">Pódio</ThemedText>
+      <ThemedText type="title">Esportes</ThemedText>
       <ThemedView style={{ height: "100%" }}>
         <FlashList
-          data={escolas}
+          data={points}
           estimatedItemSize={20}
           renderItem={({ item }) => (
             <ThemedView style={styles.stepContainer}>
-              <Link
-                key={item.id}
-                href={{
-                  pathname: "/podium/[id]",
-                  params: {
-                    name: item.name,
-                  },
-                }}
-              >
-                <ThemedText>{item?.name}</ThemedText>
-                <ThemedText>{item?.pointsTotal}</ThemedText>
-              </Link>
+              <ThemedText>{}</ThemedText>
+              <ThemedText>{}</ThemedText>
             </ThemedView>
           )}
         />
       </ThemedView>
-    </ParallaxScrollView>
+    </ThemedView>
   );
 }
 

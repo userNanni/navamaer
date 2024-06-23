@@ -1,26 +1,16 @@
+import { useEffect, useState } from "react";
 import { StyleSheet, Image, View } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { useEffect, useState } from "react";
 import { Link } from "expo-router";
+
 import PocketBase from "pocketbase";
 import { FlashList } from "@shopify/flash-list";
-import { PBLink } from "@/app/databaselink";
+
+import { PBLink } from "@/assets/types_methods/databaselink";
+import { newsTypes } from "@/assets/types_methods/types";
 
 const pb = new PocketBase(PBLink);
-
-export interface newsTypes {
-  collectionId: string;
-  collectionName: string;
-  created: string;
-  id: string;
-  topic: string;
-  title: string;
-  img: string;
-  author: string;
-  body: any;
-  updated: string;
-}
 
 export default function News() {
   const fetchData = async () => {
