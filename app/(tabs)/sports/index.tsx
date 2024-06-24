@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-import { Link } from "expo-router";
-
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { FlashList } from "@shopify/flash-list";
 
 import PocketBase from "pocketbase";
 
-import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 

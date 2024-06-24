@@ -1,7 +1,6 @@
 import {
   Image,
   StyleSheet,
-  type TextProps,
   useWindowDimensions,
   useColorScheme,
 } from "react-native";
@@ -12,7 +11,7 @@ import { ThemedView } from "@/components/ThemedView";
 import { Stack, useLocalSearchParams } from "expo-router";
 import HTMLRender from "react-native-render-html";
 import { Colors } from "@/constants/Colors";
-import { newsTypes } from ".//index";
+import { newsTypes } from "@/assets/types_methods/types";
 
 export default function Article() {
   const {

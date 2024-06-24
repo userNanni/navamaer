@@ -3,7 +3,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import PocketBase from "pocketbase";
 import { Stack, useLocalSearchParams } from "expo-router";
-import { PBLink } from "../../../assets/types_methods/databaselink";
+import { PBLink } from "@/assets/types_methods/databaselink";
 
 const pb = new PocketBase(PBLink);
 
