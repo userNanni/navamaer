@@ -12,6 +12,7 @@ import { Stack, useLocalSearchParams } from "expo-router";
 import HTMLRender from "react-native-render-html";
 import { Colors } from "@/constants/Colors";
 import { newsTypes } from "@/assets/types_methods/types";
+import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 export default function Article() {
   const {
@@ -27,7 +28,7 @@ export default function Article() {
     updated,
   } = useLocalSearchParams<newsTypes>();
 
-  const { width } = useWindowDimensions();
+  const safeArea = useSafeAreaFrame();
 
   const colorScheme = useColorScheme();
 
@@ -47,7 +48,8 @@ export default function Article() {
           source={{
             uri: `https://simplyheron.fly.dev/api/files/${collectionId}/${id}/${img}`,
           }}
-          style={styles.image}
+          style={[styles.image, 
+            { width: safeArea.width }]}
         />
       }
     >
@@ -68,7 +70,7 @@ export default function Article() {
         <ThemedText>
           <HTMLRender
             baseStyle={themeInnerHTMLStyle}
-            contentWidth={width}
+            contentWidth={safeArea.width}
             source={{ html: body }}
           />
         </ThemedText>
@@ -79,8 +81,6 @@ export default function Article() {
 
 const styles = StyleSheet.create({
   titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
     gap: 8,
   },
   stepContainer: {
@@ -88,12 +88,9 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   image: {
+    top: 0,
     height: "100%",
-    width: "100%",
     objectFit: "cover",
-    bottom: 0,
-    left: 0,
-    position: "absolute",
   },
   innerHTMLDarkTheme: {
     color: "#ECEDEE",

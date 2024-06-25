@@ -74,7 +74,7 @@ export default function News() {
                   styles.image,
                   {
                     width: safeArea.width - 80,
-                    height: safeArea.height / 10,
+                    height: safeArea.height / 8,
                     borderRadius: safeArea.width / 50,
                     alignSelf: "center",
                   },
