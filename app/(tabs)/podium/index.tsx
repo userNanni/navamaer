@@ -17,6 +17,8 @@ import {
   escolasTypes,
   pointsTypes,
 } from "@/assets/types_methods/types";
+import { Collapsible } from "@/components/Collapsible";
+import { CollapsiblePodium } from "@/components/CollapsiblePodium";
 
 const pb = new PocketBase(PBLink);
 
@@ -35,10 +37,6 @@ export default function Podium() {
   useEffect(() => {
     fetchData();
   }, []);
-
-  pb.collection("news").subscribe("*", function () {
-    fetchData();
-  });
 
   const [points, setPoints] = useState<pointsTypes[]>([]);
 
@@ -74,25 +72,26 @@ export default function Podium() {
       }
     >
       <ThemedText type="title">Pódio</ThemedText>
-      <ThemedView style={{ height: "100%" }}>
+      <ThemedView style={{ flex: 1, width: 300, height: "100%" }}>
         <FlashList
           data={escolas}
           estimatedItemSize={20}
           renderItem={({ item }) => (
-            <ThemedView style={styles.stepContainer}>
-              <Link
-                key={item.id}
-                href={{
-                  pathname: "/podium/[id]",
-                  params: {
-                    name: item.name,
-                  },
-                }}
-              >
-                <ThemedText>{item?.name}</ThemedText>
-                <ThemedText>{item?.pointsTotal}</ThemedText>
-              </Link>
-            </ThemedView>
+            <Link
+              key={item.id}
+              href={{
+                pathname: "/podium/[id]",
+                params: {
+                  name: item.name,
+                },
+              }}
+            >
+              <CollapsiblePodium
+                title={item?.name}
+                points={item?.pointsTotal}
+                children={<ThemedText></ThemedText>}
+              ></CollapsiblePodium>
+            </Link>
           )}
         />
       </ThemedView>

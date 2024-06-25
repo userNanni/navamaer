@@ -28,32 +28,11 @@ export default function News() {
     fetchData();
   }, []);
 
-  pb.collection("news").subscribe("*", function () {
-    fetchData();
-  });
-
   const [news, setNews] = useState<newsTypes[]>([]);
 
-  const { width } = useWindowDimensions();
-
   return (
-    <ThemedView
-      style={{
-        paddingTop: 64,
-        flex: 1,
-        padding: 32,
-        gap: 16,
-        overflow: "hidden",
-      }}
-    >
-      <ThemedText
-        type="title"
-        style={{
-          fontSize: 50,
-          height: 100,
-          alignContent: "center",
-        }}
-      >
+    <ThemedView style={styles.newsView}>
+      <ThemedText type="title" style={styles.newsTitle}>
         Notícias
       </ThemedText>
       <FlashList
@@ -87,7 +66,10 @@ export default function News() {
                     uri: `https://simplyheron.fly.dev/api/files/${item.collectionId}/${item.id}/${item.img}`,
                   }}
                 ></Image>
-                <ThemedText type="subtitle" style={{ flex: 1 }}>
+                <ThemedText
+                  type="subtitle"
+                  style={{ flex: 1, flexWrap: "wrap" }}
+                >
                   {item?.title}
                 </ThemedText>
                 <ThemedText>autor: {item?.author}</ThemedText>
@@ -101,6 +83,19 @@ export default function News() {
 }
 
 const styles = StyleSheet.create({
+  newsView: {
+    paddingTop: 64,
+    flex: 1,
+    padding: 32,
+    gap: 16,
+    display: "flex",
+    flexWrap: "wrap",
+  },
+  newsTitle: {
+    fontSize: 50,
+    height: 100,
+    alignContent: "center",
+  },
   article: {
     margin: 10,
     gap: 8,
@@ -114,7 +109,8 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     height: 60,
-    width: "100%",
+    minWidth: "100%",
+    flexWrap: "wrap",
     objectFit: "cover",
   },
 });

@@ -30,10 +30,6 @@ export default function Podium() {
     fetchData();
   }, []);
 
-  pb.collection("news").subscribe("*", function () {
-    fetchData();
-  });
-
   const [points, setPoints] = useState<pointsTypes[]>([]);
 
   return (
