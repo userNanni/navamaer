@@ -4,8 +4,11 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
+import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
+  const safeArea = useSafeAreaFrame();
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -28,7 +31,10 @@ export default function HomeScreen() {
               ? require("@/assets/images/logoDark.png")
               : require("@/assets/images/logoLight.png")
           }
-          style={styles.navamaerLogo}
+          style={[
+            styles.navamaerLogo,
+            { width: safeArea.width - 64, height: (safeArea.width - 64) / 5 },
+          ]}
         />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
@@ -68,7 +74,7 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  bannerImage: { width: "100%", height: "100%", objectFit: "scale-down" },
+  bannerImage: { width: "100%", height: "100%", objectFit: "cover" },
   titleContainer: {
     alignItems: "center",
   },
@@ -77,9 +83,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   navamaerLogo: {
-    height: 80,
-    width: 400,
-    bottom: 0,
-    left: 0,
+    objectFit: "scale-down",
+    height: "auto",
   },
 });

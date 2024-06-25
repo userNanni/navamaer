@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Link } from "expo-router";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -86,10 +86,10 @@ export default function Podium() {
                 },
               }}
             >
-              <ThemedText>{item?.name}</ThemedText>
-              <ThemedText>{item?.pointsTotal}</ThemedText>
-
-              <ThemedText></ThemedText>
+              <View style={{ alignContent: "space-between" }}>
+                <ThemedText>{item?.name}</ThemedText>
+                <ThemedText>{item?.pointsTotal}</ThemedText>
+              </View>
             </Link>
           )}
         />

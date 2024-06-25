@@ -9,10 +9,13 @@ import { FlashList } from "@shopify/flash-list";
 
 import { PBLink } from "@/assets/types_methods/databaselink";
 import { newsTypes } from "@/assets/types_methods/types";
+import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 const pb = new PocketBase(PBLink);
 
 export default function News() {
+  const safeArea = useSafeAreaFrame();
+
   const fetchData = async () => {
     try {
       const records = await pb.collection("news").getFullList<newsTypes>({
@@ -31,51 +34,67 @@ export default function News() {
   const [news, setNews] = useState<newsTypes[]>([]);
 
   return (
-    <ThemedView style={styles.newsView}>
-      <ThemedText type="title" style={styles.newsTitle}>
-        Notícias
-      </ThemedText>
+    <ThemedView style={[styles.newsView, { width: safeArea.width }]}>
       <FlashList
         data={news}
         estimatedItemSize={20}
         renderItem={({ item }) => (
-          <ThemedView style={styles.stepContainer}>
-            <Link
-              key={item.id}
-              href={{
-                pathname: "/news/[id]",
-                params: {
-                  collectionId: item.collectionId,
-                  collectionName: item.collectionName,
-                  created: item.created,
-                  id: item.id,
-                  topic: item.topic,
-                  img: item.img,
-                  title: item.title,
-                  author: item.author,
-                  body: item.body,
-                  updated: item.updated,
-                  key: item.id,
+          <Link
+            key={item.id}
+            style={styles.article}
+            href={{
+              pathname: "/news/[id]",
+              params: {
+                collectionId: item.collectionId,
+                collectionName: item.collectionName,
+                created: item.created,
+                id: item.id,
+                topic: item.topic,
+                img: item.img,
+                title: item.title,
+                author: item.author,
+                body: item.body,
+                updated: item.updated,
+                key: item.id,
+              },
+            }}
+          >
+            <View
+              style={[
+                {
+                  width: safeArea.width - 64,
+                  backgroundColor: "#a0a0a0",
+                  padding: 8,
+                  borderRadius: safeArea.width / 50 + 8,
                 },
-              }}
+              ]}
             >
-              <View style={styles.article}>
-                <Image
-                  style={styles.image}
-                  source={{
-                    uri: `https://simplyheron.fly.dev/api/files/${item.collectionId}/${item.id}/${item.img}`,
-                  }}
-                ></Image>
-                <ThemedText
-                  type="subtitle"
-                  style={{ flex: 1, flexWrap: "wrap" }}
-                >
-                  {item?.title}
-                </ThemedText>
+              <Image
+                style={[
+                  styles.image,
+                  {
+                    width: safeArea.width - 80,
+                    height: safeArea.height / 10,
+                    borderRadius: safeArea.width / 50,
+                    alignSelf: "center",
+                  },
+                ]}
+                source={{
+                  uri: `https://simplyheron.fly.dev/api/files/${item.collectionId}/${item.id}/${item.img}`,
+                }}
+              ></Image>
+              <View
+                style={{
+                  flex: 1,
+                  marginTop: 4,
+                  marginBottom: 4,
+                }}
+              >
+                <ThemedText type="subtitle">{item?.title}</ThemedText>
                 <ThemedText>autor: {item?.author}</ThemedText>
               </View>
-            </Link>
-          </ThemedView>
+            </View>
+          </Link>
         )}
       />
     </ThemedView>
@@ -84,33 +103,15 @@ export default function News() {
 
 const styles = StyleSheet.create({
   newsView: {
-    paddingTop: 64,
     flex: 1,
-    padding: 32,
+    paddingLeft: 32,
+    paddingRight: 32,
     gap: 16,
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  newsTitle: {
-    fontSize: 50,
-    height: 100,
-    alignContent: "center",
   },
   article: {
-    margin: 10,
-    gap: 8,
-    marginBottom: 8,
-  },
-  stepContainer: {
-    minWidth: "100%",
-    gap: 8,
-    marginBottom: 8,
+    marginBottom: 16,
   },
   image: {
-    flex: 1,
-    height: 60,
-    minWidth: "100%",
-    flexWrap: "wrap",
     objectFit: "cover",
   },
 });
