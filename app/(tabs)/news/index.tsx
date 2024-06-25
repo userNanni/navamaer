@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, Image, View } from "react-native";
+import { StyleSheet, Image, View, useWindowDimensions } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Link } from "expo-router";
@@ -34,6 +34,8 @@ export default function News() {
 
   const [news, setNews] = useState<newsTypes[]>([]);
 
+  const { width } = useWindowDimensions();
+
   return (
     <ThemedView
       style={{
@@ -46,7 +48,11 @@ export default function News() {
     >
       <ThemedText
         type="title"
-        style={{ fontSize: 50, height: 100, alignItems: "flex-end" }}
+        style={{
+          fontSize: 50,
+          height: 100,
+          alignContent: "center",
+        }}
       >
         Notícias
       </ThemedText>
@@ -81,12 +87,10 @@ export default function News() {
                     uri: `https://simplyheron.fly.dev/api/files/${item.collectionId}/${item.id}/${item.img}`,
                   }}
                 ></Image>
-                <ThemedText
-                  type="subtitle"
-                  style={{ color: "red", flexWrap: "nowrap" }}
-                >
+                <ThemedText type="subtitle" style={{ flex: 1 }}>
                   {item?.title}
                 </ThemedText>
+                <ThemedText>autor: {item?.author}</ThemedText>
               </View>
             </Link>
           </ThemedView>
@@ -103,6 +107,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   stepContainer: {
+    minWidth: "100%",
     gap: 8,
     marginBottom: 8,
   },

@@ -53,8 +53,8 @@ export default function Podium() {
           estimatedItemSize={20}
           renderItem={({ item }) => (
             <ThemedView style={styles.stepContainer}>
-              <ThemedText>{}</ThemedText>
-              <ThemedText>{}</ThemedText>
+              <ThemedText type="subtitle">{item.modalidade}</ThemedText>
+              <ThemedText>{item.escola}</ThemedText>
             </ThemedView>
           )}
         />

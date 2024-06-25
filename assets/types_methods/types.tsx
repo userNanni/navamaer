@@ -1,4 +1,5 @@
 export interface pointsTypes {
+  [key: string]: any;
   collectionId: string;
   collectionName: string;
   created: string;
@@ -9,12 +10,14 @@ export interface pointsTypes {
   updated: string;
 }
 export interface escolasTypes {
+  [key: string]: any;
   id: number;
   name: string;
   pointsTotal: number;
 }
 
 export interface newsTypes {
+  [key: string]: any;
   collectionId: string;
   collectionName: string;
   created: string;
