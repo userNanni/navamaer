@@ -41,10 +41,10 @@ export function CollapsiblePodium({
         />
         <ThemedView
           style={{
-            width: safeAreaFrame.width - 96,
+            width: safeAreaFrame.width,
             flex: 1,
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "space-around",
           }}
         >
           <ThemedText type="subtitle">{title}</ThemedText>

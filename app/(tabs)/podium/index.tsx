@@ -72,7 +72,7 @@ export default function Podium() {
       }
     >
       <ThemedText type="title">Pódio</ThemedText>
-      <ThemedView style={{ flex: 1, width: 300, height: "100%" }}>
+      <ThemedView style={{ flex: 1, height: "100%" }}>
         <FlashList
           data={escolas}
           estimatedItemSize={20}
@@ -86,11 +86,10 @@ export default function Podium() {
                 },
               }}
             >
-              <CollapsiblePodium
-                title={item?.name}
-                points={item?.pointsTotal}
-                children={<ThemedText></ThemedText>}
-              ></CollapsiblePodium>
+              <ThemedText>{item?.name}</ThemedText>
+              <ThemedText>{item?.pointsTotal}</ThemedText>
+
+              <ThemedText></ThemedText>
             </Link>
           )}
         />

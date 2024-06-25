@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Platform } from "react-native";
+import { Image, StyleSheet, Platform, useColorScheme } from "react-native";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
@@ -23,7 +23,11 @@ export default function HomeScreen() {
       <ThemedView style={styles.titleContainer}>
         {/* trocar essa logo para a vetorial dela e mudar a fonte para ser reativa ao tema */}
         <Image
-          source={require("@/assets/images/Logo_Site_Transparente.webp")}
+          source={
+            useColorScheme() == "dark"
+              ? require("@/assets/images/logoDark.png")
+              : require("@/assets/images/logoLight.png")
+          }
           style={styles.navamaerLogo}
         />
       </ThemedView>
@@ -64,7 +68,7 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  bannerImage: { width: "100%", height: "100%", objectFit: "cover" },
+  bannerImage: { width: "100%", height: "100%", objectFit: "scale-down" },
   titleContainer: {
     alignItems: "center",
   },
