@@ -27,7 +27,6 @@ export default function Article() {
     body,
     updated,
   } = useLocalSearchParams<newsTypes>();
-
   const safeArea = useSafeAreaFrame();
 
   const colorScheme = useColorScheme();
@@ -48,8 +47,7 @@ export default function Article() {
           source={{
             uri: `https://simplyheron.fly.dev/api/files/${collectionId}/${id}/${img}`,
           }}
-          style={[styles.image, 
-            { width: safeArea.width }]}
+          style={[styles.image, { width: safeArea.width }]}
         />
       }
     >
@@ -63,30 +61,31 @@ export default function Article() {
           },
         }}
       />
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">{title}</ThemedText>
-      </ThemedView>
-      <ThemedView>
-        <ThemedText>
+      <ThemedView
+        style={{
+          gap: 8,
+          flexDirection: "column",
+        }}
+      >
+        <ThemedView>
+          <ThemedText style={styles.titleContainer} type="title">
+            {title}
+          </ThemedText>
+        </ThemedView>
+        <ThemedView style={{ alignContent: "space-evenly" }}>
           <HTMLRender
             baseStyle={themeInnerHTMLStyle}
             contentWidth={safeArea.width}
             source={{ html: body }}
           />
-        </ThemedText>
+        </ThemedView>
       </ThemedView>
     </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
+  titleContainer: {},
   image: {
     top: 0,
     height: "100%",

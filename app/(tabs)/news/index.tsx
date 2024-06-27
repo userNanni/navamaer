@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, Image, View, useWindowDimensions } from "react-native";
+import { StyleSheet, Image, View, useColorScheme } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Link } from "expo-router";
@@ -15,6 +15,7 @@ const pb = new PocketBase(PBLink);
 
 export default function News() {
   const safeArea = useSafeAreaFrame();
+  const theme = useColorScheme();
 
   const fetchData = async () => {
     try {
@@ -34,7 +35,9 @@ export default function News() {
   const [news, setNews] = useState<newsTypes[]>([]);
 
   return (
-    <ThemedView style={[styles.newsView, { width: safeArea.width }]}>
+    <ThemedView
+      style={[styles.newsView, { width: safeArea.width, paddingTop: 20 }]}
+    >
       <FlashList
         data={news}
         estimatedItemSize={20}
@@ -61,9 +64,11 @@ export default function News() {
           >
             <View
               style={[
+                theme == "dark"
+                  ? { backgroundColor: "#252728" }
+                  : { backgroundColor: "#e2e2e2" },
                 {
                   width: safeArea.width - 64,
-                  backgroundColor: "#a0a0a0",
                   padding: 8,
                   borderRadius: safeArea.width / 50 + 8,
                 },
@@ -86,11 +91,13 @@ export default function News() {
               <View
                 style={{
                   flex: 1,
-                  marginTop: 4,
-                  marginBottom: 4,
+                  padding: 6,
+                  alignItems: "center",
                 }}
               >
-                <ThemedText type="subtitle">{item?.title}</ThemedText>
+                <ThemedText type="subtitle" style={{ width: "100%" }}>
+                  {item?.title}
+                </ThemedText>
                 <ThemedText>autor: {item?.author}</ThemedText>
               </View>
             </View>
