@@ -1,9 +1,4 @@
-import {
-  Image,
-  StyleSheet,
-  useWindowDimensions,
-  useColorScheme,
-} from "react-native";
+import { Image, StyleSheet, useColorScheme } from "react-native";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
@@ -15,26 +10,14 @@ import { newsTypes } from "@/assets/types_methods/types";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 export default function Article() {
-  const {
-    collectionId,
-    collectionName,
-    created,
-    id,
-    topic,
-    img,
-    title,
-    author,
-    body,
-    updated,
-  } = useLocalSearchParams<newsTypes>();
+  const { collectionId, id, topic, img, title, author, body, updated } =
+    useLocalSearchParams<newsTypes>();
   const safeArea = useSafeAreaFrame();
 
-  const colorScheme = useColorScheme();
+  const theme = useColorScheme();
 
   const themeInnerHTMLStyle =
-    colorScheme === "light"
-      ? styles.innerHTMLLightTheme
-      : styles.innerHTMLDarkTheme;
+    theme === "light" ? styles.innerHTMLLightTheme : styles.innerHTMLDarkTheme;
 
   return (
     <ParallaxScrollView
@@ -67,10 +50,22 @@ export default function Article() {
           flexDirection: "column",
         }}
       >
-        <ThemedView>
-          <ThemedText style={styles.titleContainer} type="title">
+        <ThemedView
+          style={[
+            theme == "light"
+              ? { borderBottomColor: "#151718" }
+              : { borderBottomColor: "#f2f2f2" },
+            {
+              borderBottomWidth: StyleSheet.hairlineWidth,
+              gap: 2,
+              paddingBottom: 8,
+            },
+          ]}
+        >
+          <ThemedText style={[styles.titleContainer]} type="subtitle">
             {title}
           </ThemedText>
+          <ThemedText>Escrito por: {author}</ThemedText>
         </ThemedView>
         <ThemedView style={{ alignContent: "space-evenly" }}>
           <HTMLRender
@@ -88,6 +83,8 @@ const styles = StyleSheet.create({
   titleContainer: {},
   image: {
     top: 0,
+    left: 0,
+    position: "absolute",
     height: "100%",
     objectFit: "cover",
   },

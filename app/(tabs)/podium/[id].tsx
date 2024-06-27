@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, useColorScheme } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import PocketBase from "pocketbase";
@@ -10,9 +10,14 @@ const pb = new PocketBase(PBLink);
 import { pointsTypes, escolasTypes } from "@/assets/types_methods/types";
 import { useEffect, useState } from "react";
 import { FlashList } from "@shopify/flash-list";
+import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 export default function Points() {
   const { name } = useLocalSearchParams<escolasTypes>();
+  const safeArea = useSafeAreaFrame();
+  const theme = useColorScheme();
+  const [loaded, setLoaded] = useState(false);
+  const colorReactive = theme == "dark" ? "#252728" : "#e2e2e2";
 
   const fetchData = async () => {
     try {
@@ -39,7 +44,6 @@ export default function Points() {
   return (
     <ThemedView
       style={{
-        paddingTop: 64,
         flex: 1,
         padding: 32,
         gap: 16,
@@ -60,10 +64,23 @@ export default function Points() {
         data={points}
         estimatedItemSize={20}
         renderItem={({ item }) => (
-          <ThemedView style={styles.stepContainer}>
-            <ThemedText>{item?.escola}</ThemedText>
-            <ThemedText>{item?.modalidade}</ThemedText>
-            <ThemedText>{item?.pontos}</ThemedText>
+          <ThemedView
+            style={[
+              {
+                gap: 8,
+                marginVertical: 8,
+                backgroundColor: colorReactive,
+                width: safeArea.width - 64,
+                padding: 8,
+                paddingHorizontal: 16,
+                borderRadius: safeArea.width / 50 + 8,
+                flexDirection: "row",
+                justifyContent: "space-between",
+              },
+            ]}
+          >
+            <ThemedText type="subtitle">{item?.modalidade}</ThemedText>
+            <ThemedText type="subtitle">{item?.pontos}</ThemedText>
           </ThemedView>
         )}
       />
@@ -76,10 +93,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignItems: "center",
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
+
   navamaerLogo: {
     height: 80,
     width: 400,
