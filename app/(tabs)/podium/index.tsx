@@ -59,6 +59,7 @@ export default function Podium() {
     {
       id: 1,
       name: "AFA",
+      imageSource: "@/assets/images/favicon.png",
       pointsTotal: points.reduce(function (acc, src) {
         return src.escola == "AFA" ? acc + src.pontos : acc;
       }, 0),
@@ -66,12 +67,14 @@ export default function Podium() {
     {
       id: 2,
       name: "EN",
+      imageSource: "@/assets/images/favicon.png",
       pointsTotal: points.reduce(function (acc, src) {
         return src.escola == "EN" ? acc + src.pontos : acc;
       }, 0),
     },
     {
       id: 3,
+      imageSource: "@/assets/images/favicon.png",
       name: "AMAN",
       pointsTotal: points.reduce(function (acc, src) {
         return src.escola == "AMAN" ? acc + src.pontos : acc;
