@@ -24,13 +24,17 @@ export default function News() {
       });
       setNews(records);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  pb.collection("news").subscribe("*", function () {
+    fetchData();
+  });
 
   const [news, setNews] = useState<newsTypes[]>([]);
 
