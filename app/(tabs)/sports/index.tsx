@@ -22,13 +22,17 @@ export default function Podium() {
       });
       setPoints(records);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  pb.collection("points").subscribe("*", function () {
+    fetchData();
+  });
 
   const [points, setPoints] = useState<pointsTypes[]>([]);
 

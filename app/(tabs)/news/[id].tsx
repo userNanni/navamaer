@@ -1,9 +1,4 @@
-import {
-  Image,
-  StyleSheet,
-  useWindowDimensions,
-  useColorScheme,
-} from "react-native";
+import { Image, StyleSheet, useColorScheme } from "react-native";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
@@ -12,29 +7,17 @@ import { Stack, useLocalSearchParams } from "expo-router";
 import HTMLRender from "react-native-render-html";
 import { Colors } from "@/constants/Colors";
 import { newsTypes } from "@/assets/types_methods/types";
+import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 export default function Article() {
-  const {
-    collectionId,
-    collectionName,
-    created,
-    id,
-    topic,
-    img,
-    title,
-    author,
-    body,
-    updated,
-  } = useLocalSearchParams<newsTypes>();
+  const { collectionId, id, topic, img, title, author, body, updated } =
+    useLocalSearchParams<newsTypes>();
+  const safeArea = useSafeAreaFrame();
 
-  const { width } = useWindowDimensions();
-
-  const colorScheme = useColorScheme();
+  const theme = useColorScheme();
 
   const themeInnerHTMLStyle =
-    colorScheme === "light"
-      ? styles.innerHTMLLightTheme
-      : styles.innerHTMLDarkTheme;
+    theme === "light" ? styles.innerHTMLLightTheme : styles.innerHTMLDarkTheme;
 
   return (
     <ParallaxScrollView
@@ -47,7 +30,7 @@ export default function Article() {
           source={{
             uri: `https://simplyheron.fly.dev/api/files/${collectionId}/${id}/${img}`,
           }}
-          style={styles.image}
+          style={[styles.image, { width: safeArea.width }]}
         />
       }
     >
@@ -61,39 +44,49 @@ export default function Article() {
           },
         }}
       />
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">{title}</ThemedText>
-      </ThemedView>
-      <ThemedView>
-        <ThemedText>
+      <ThemedView
+        style={{
+          gap: 8,
+          flexDirection: "column",
+        }}
+      >
+        <ThemedView
+          style={[
+            theme == "light"
+              ? { borderBottomColor: "#151718" }
+              : { borderBottomColor: "#f2f2f2" },
+            {
+              borderBottomWidth: StyleSheet.hairlineWidth,
+              gap: 2,
+              paddingBottom: 8,
+            },
+          ]}
+        >
+          <ThemedText style={[styles.titleContainer]} type="subtitle">
+            {title}
+          </ThemedText>
+          <ThemedText>Escrito por: {author}</ThemedText>
+        </ThemedView>
+        <ThemedView style={{ alignContent: "space-evenly" }}>
           <HTMLRender
             baseStyle={themeInnerHTMLStyle}
-            contentWidth={width}
+            contentWidth={safeArea.width}
             source={{ html: body }}
           />
-        </ThemedText>
+        </ThemedView>
       </ThemedView>
     </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
+  titleContainer: {},
   image: {
-    height: "100%",
-    width: "100%",
-    objectFit: "cover",
-    bottom: 0,
+    top: 0,
     left: 0,
     position: "absolute",
+    height: "100%",
+    objectFit: "cover",
   },
   innerHTMLDarkTheme: {
     color: "#ECEDEE",

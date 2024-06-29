@@ -13,6 +13,7 @@ export interface escolasTypes {
   [key: string]: any;
   id: number;
   name: string;
+  imageSource: string;
   pointsTotal: number;
 }
 
