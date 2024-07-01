@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import { ActivityIndicator, StyleSheet, useColorScheme } from "react-native";
 
 import { FlashList } from "@shopify/flash-list";
 
@@ -10,17 +10,25 @@ import { ThemedView } from "@/components/ThemedView";
 
 import { PBLink } from "@/assets/types_methods/databaselink";
 
-import { pointsTypes } from "@/assets/types_methods/types";
+import { sportsTypes } from "@/assets/types_methods/types";
+import { useSafeAreaFrame } from "react-native-safe-area-context";
+import TableComponent from "@/components/tableComponent";
 
 const pb = new PocketBase(PBLink);
 
 export default function Podium() {
+  const safeArea = useSafeAreaFrame();
+  const theme = useColorScheme();
+  const [loaded, setLoaded] = useState(false);
+  const colorReactive = theme == "dark" ? "#252728" : "#e2e2e2";
+
   const fetchData = async () => {
     try {
-      const records = await pb.collection("points").getFullList<pointsTypes>({
+      const records = await pb.collection("sports").getFullList<sportsTypes>({
         sort: "-created",
       });
-      setPoints(records);
+      setSports(records);
+      setLoaded(true);
     } catch (error) {
       throw error;
     }
@@ -30,37 +38,60 @@ export default function Podium() {
     fetchData();
   }, []);
 
-  pb.collection("points").subscribe("*", function () {
+  pb.collection("sports").subscribe("*", function () {
     fetchData();
   });
 
-  const [points, setPoints] = useState<pointsTypes[]>([]);
+  const [sports, setSports] = useState<sportsTypes[]>([]);
 
-  return (
-    <ThemedView
-      style={{
-        paddingTop: 64,
-        flex: 1,
-        padding: 32,
-        gap: 16,
-        overflow: "hidden",
-      }}
-    >
-      <ThemedText type="title">Esportes</ThemedText>
-      <ThemedView style={{ height: "100%" }}>
-        <FlashList
-          data={points}
-          estimatedItemSize={20}
-          renderItem={({ item }) => (
-            <ThemedView style={styles.stepContainer}>
-              <ThemedText type="subtitle">{item.modalidade}</ThemedText>
-              <ThemedText>{item.escola}</ThemedText>
-            </ThemedView>
-          )}
-        />
+  if (loaded) {
+    return (
+      <ThemedView
+        style={{
+          paddingTop: 64,
+          flex: 1,
+          padding: 32,
+          gap: 16,
+          overflow: "hidden",
+        }}
+      >
+        <ThemedText type="title">Esportes</ThemedText>
+        <ThemedView style={{ height: "100%" }}>
+          <FlashList
+            data={sports}
+            estimatedItemSize={20}
+            renderItem={({ item }) =>
+              item.coletivo ? (
+                <ThemedView style={styles.stepContainer}>
+                  <ThemedText type="subtitle">{item.modalidade}</ThemedText>
+                  <ThemedText>{item.prova}</ThemedText>
+                </ThemedView>
+              ) : (
+                <ThemedView style={styles.stepContainer}>
+                  <ThemedText type="subtitle">{item.modalidade}</ThemedText>
+                  <ThemedText>{item.prova}</ThemedText>
+                    <TableComponent data={item.resultados} />
+                </ThemedView>
+              )
+            }
+          />
+        </ThemedView>
       </ThemedView>
-    </ThemedView>
-  );
+    );
+  } else {
+    return (
+      <ThemedView
+        style={{
+          alignItems: "center",
+          justifyContent: "center",
+          width: safeArea.width,
+          height: safeArea.height,
+        }}
+      >
+        <ActivityIndicator size="large" color={colorReactive} />
+      </ThemedView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

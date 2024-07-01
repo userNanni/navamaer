@@ -31,6 +31,19 @@ export interface newsTypes {
   updated: string;
 }
 
+export interface sportsTypes {
+  [key: string]: any;
+  collectionId: string;
+  collectionName: string;
+  created: string;
+  id: string;
+  modalidade: string;
+  prova: string;
+  coletivo: boolean;
+  resultados: JSON;
+  updated: string;
+}
+
 export function compare(a: escolasTypes, b: escolasTypes) {
   if (a.pointsTotal < b.pointsTotal) {
     return 1;
