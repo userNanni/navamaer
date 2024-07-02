@@ -6,6 +6,8 @@ import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 
+import { WebView } from "react-native-webview";
+
 export default function HomeScreen() {
   const safeArea = useSafeAreaFrame();
 
@@ -37,37 +39,47 @@ export default function HomeScreen() {
           ]}
         />
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
+
+      <ThemedView style={[styles.stepContainer, styles.firstStepContainer]}>
         <ThemedText>
-          Edit{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          to see changes. Press{" "}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: "cmd + d", android: "cmd + m" })}
-          </ThemedText>{" "}
-          to open developer tools.
+          Navamaer é uma competição entre as três escolas de formação de
+          oficiais de carreira das Forças Armadas do Brasil: Escola Naval (EN),
+          Academia Militar das Agulhas Negras (AMAN) e Academia da Força Aérea
+          (AFA). Ocorre anualmente, e tem como principal objetivo estreitar os
+          laços de amizade entre Marinha, Exército e Aeronáutica.
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">
-          Tap the Explore tab to learn more about what's included in this
-          starter app.
+        <ThemedText type="subtitle" style={styles.subtitle}>
+          AFA 2024
         </ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this
-          starter app.
+        <ThemedText style={styles.subtitleWithIndent}>
+          Este ano a competição será realizada na Academia da Força Aérea,
+          localizada em Pirassununga - SP, de 19 a 26 de Julho de 2024.
         </ThemedText>
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{" "}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText>{" "}
-          to get a fresh <ThemedText type="defaultSemiBold">app</ThemedText>{" "}
-          directory. This will move the current{" "}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
+
+      <ThemedView style={[styles.calendarContainer, styles.stepContainer]}>
+        <ThemedText type="subtitle" style={styles.subtitle}>
+          Cronograma
         </ThemedText>
+        <WebView
+          source={{
+            uri: "https://calendar.google.com/calendar/u/0/embed?height=300&wkst=1&ctz=America/Sao_Paulo&bgcolor=%23ffffff&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&mode=AGENDA&hl=pt_BR&src=bHZpLm5hdmFtYWVyLmFmYUBnbWFpbC5jb20&color=%23039BE5",
+          }}
+          style={styles.calendar}
+        />
+      </ThemedView>
+
+      <ThemedView style={styles.stepContainerPatrocinadores}>
+        <ThemedText type="subtitle" style={styles.subtitle}>
+          Patrocinadores
+        </ThemedText>
+
+        <Image
+          source={require("@/assets/images/patrocinadores.jpg")}
+          style={styles.patrocinadores}
+        />
       </ThemedView>
     </ParallaxScrollView>
   );
@@ -80,10 +92,41 @@ const styles = StyleSheet.create({
   },
   stepContainer: {
     gap: 8,
-    marginBottom: 8,
+    marginBottom: 30,
+  },
+  firstStepContainer: {
+    marginTop: 40, //Aumenta o espaçamento entre a logo da NAMAVAER e o primeiro texto
   },
   navamaerLogo: {
     objectFit: "scale-down",
     height: "auto",
+  },
+  patrocinadores: {
+    width: "100%",
+    height: 100,
+    resizeMode: "contain",
+  },
+  stepContainerPatrocinadores: {
+    marginTop: 40,
+  },
+  subtitle: {
+    textAlign: "center",
+  },
+  subtitleWithIndent: {
+    textIndent: 20,
+  },
+  calendarContainer: {
+    height: 300,
+    marginVertical: 20,
+    borderRadius: 10,
+    overflow: "hidden",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  calendar: {
+    flex: 1,
   },
 });
