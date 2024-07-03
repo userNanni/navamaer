@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet, useColorScheme } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  View,
+  Text,
+  useColorScheme,
+} from "react-native";
 
 import { FlashList } from "@shopify/flash-list";
 
@@ -10,9 +16,8 @@ import { ThemedView } from "@/components/ThemedView";
 
 import { PBLink } from "@/assets/types_methods/databaselink";
 
-import { sportsTypes } from "@/assets/types_methods/types";
+import { sportsTypes, resultados } from "@/assets/types_methods/types";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
-import TableComponent from "@/components/tableComponent";
 
 const pb = new PocketBase(PBLink);
 
@@ -21,6 +26,16 @@ export default function Podium() {
   const theme = useColorScheme();
   const [loaded, setLoaded] = useState(false);
   const colorReactive = theme == "dark" ? "#252728" : "#e2e2e2";
+  const colorReactiveInverted = theme == "dark" ? "#e2e2e2" : "#252728";
+
+  const renderItem = ({ item }: resultados) => (
+    <ThemedView>
+      <ThemedText>{item.id}</ThemedText>
+      <ThemedText>{item.nome}</ThemedText>
+      <ThemedText>{item.escola}</ThemedText>
+      <ThemedText>{item.resultado}</ThemedText>
+    </ThemedView>
+  );
 
   const fetchData = async () => {
     try {
@@ -62,15 +77,208 @@ export default function Podium() {
             estimatedItemSize={20}
             renderItem={({ item }) =>
               item.coletivo ? (
-                <ThemedView style={styles.stepContainer}>
-                  <ThemedText type="subtitle">{item.modalidade}</ThemedText>
-                  <ThemedText>{item.prova}</ThemedText>
+                <ThemedView
+                  style={[
+                    styles.stepContainer,
+                    { borderRadius: 12, padding: 6 },
+                  ]}
+                >
+                  <ThemedView style={{ flexDirection: "column" }}>
+                    <ThemedText
+                      type="subtitle"
+                      style={{
+                        alignSelf: "flex-start",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {item.modalidade}
+                    </ThemedText>
+                    <ThemedText
+                      style={{
+                        alignSelf: "flex-end",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {item.prova}
+                    </ThemedText>
+                  </ThemedView>
+
+                  <ThemedView
+                    style={{
+                      backgroundColor: colorReactive,
+                      borderColor: colorReactiveInverted,
+                      borderWidth: StyleSheet.hairlineWidth,
+                    }}
+                  >
+                    <FlashList
+                      data={item.resultados}
+                      keyExtractor={(item) => item.id.toString()}
+                      renderItem={({ item }) =>
+                        0 == item.id ? (
+                          <ThemedView
+                            style={{
+                              flexDirection: "row",
+                              minWidth: (safeArea.width * 5) / 6,
+                            }}
+                          >
+                            <ThemedText
+                              style={{
+                                minWidth: safeArea.width / 6,
+                                justifyContent: "center",
+                                alignContent: "center",
+                                textAlign: "center",
+                                borderLeftWidth: StyleSheet.hairlineWidth,
+                                borderLeftColor: colorReactiveInverted,
+                              }}
+                            >
+                              {item.escola}
+                            </ThemedText>
+                            <ThemedText
+                              style={{
+                                justifyContent: "center",
+                                alignContent: "center",
+                                textAlign: "center",
+                                borderLeftWidth: StyleSheet.hairlineWidth,
+                                borderLeftColor: colorReactiveInverted,
+                              }}
+                            >
+                              {item.resultado}
+                            </ThemedText>
+                          </ThemedView>
+                        ) : (
+                          <ThemedView
+                            style={{
+                              flexDirection: "row",
+                              minWidth: (safeArea.width * 5) / 6,
+                            }}
+                          >
+                            <ThemedText
+                              style={{
+                                justifyContent: "center",
+                                alignContent: "center",
+                                textAlign: "center",
+                                borderLeftWidth: StyleSheet.hairlineWidth,
+                                borderLeftColor: colorReactiveInverted,
+                              }}
+                            >
+                              {item.resultado}
+                            </ThemedText>
+                            <ThemedText
+                              style={{
+                                minWidth: safeArea.width / 6,
+                                justifyContent: "center",
+                                alignContent: "center",
+                                textAlign: "center",
+                                borderLeftWidth: StyleSheet.hairlineWidth,
+                                borderLeftColor: colorReactiveInverted,
+                              }}
+                            >
+                              {item.escola}
+                            </ThemedText>
+                          </ThemedView>
+                        )
+                      }
+                    />
+                  </ThemedView>
                 </ThemedView>
               ) : (
-                <ThemedView style={styles.stepContainer}>
-                  <ThemedText type="subtitle">{item.modalidade}</ThemedText>
-                  <ThemedText>{item.prova}</ThemedText>
-                    <TableComponent data={item.resultados} />
+                <ThemedView
+                  style={[
+                    styles.stepContainer,
+                    { borderRadius: 12, padding: 6 },
+                  ]}
+                >
+                  <ThemedView style={{ flexDirection: "column" }}>
+                    <ThemedText
+                      type="subtitle"
+                      style={{
+                        alignSelf: "flex-start",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {item.modalidade}
+                    </ThemedText>
+                    <ThemedText
+                      style={{
+                        alignSelf: "flex-end",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {item.prova}
+                    </ThemedText>
+                  </ThemedView>
+
+                  <ThemedView
+                    style={{
+                      backgroundColor: colorReactive,
+                      borderColor: colorReactiveInverted,
+                      borderWidth: StyleSheet.hairlineWidth,
+                    }}
+                  >
+                    <FlashList
+                      data={item.resultados}
+                      keyExtractor={(item) => item.id.toString()}
+                      renderItem={({ item }) => (
+                        <ThemedView
+                          style={{
+                            flexDirection: "row",
+                            minWidth: (safeArea.width * 5) / 6,
+                          }}
+                        >
+                          <ThemedText
+                            style={{
+                              width: "auto",
+                              justifyContent: "center",
+                              alignContent: "center",
+                              textAlign: "center",
+                              paddingHorizontal: 10,
+                            }}
+                          >
+                            {item.id + 1}
+                            {"º"}
+                          </ThemedText>
+                          <ThemedText
+                            style={{
+                              minWidth: (safeArea.width * 5) / 12,
+                              justifyContent: "center",
+                              alignContent: "center",
+                              textAlign: "center",
+                              paddingHorizontal: 10,
+                              borderLeftWidth: StyleSheet.hairlineWidth,
+                              borderLeftColor: colorReactiveInverted,
+                            }}
+                          >
+                            {item.nome}
+                          </ThemedText>
+                          <ThemedText
+                            style={{
+                              minWidth: safeArea.width / 6,
+                              justifyContent: "center",
+                              alignContent: "center",
+                              textAlign: "center",
+                              paddingHorizontal: 10,
+                              borderLeftWidth: StyleSheet.hairlineWidth,
+                              borderLeftColor: colorReactiveInverted,
+                            }}
+                          >
+                            {item.escola}
+                          </ThemedText>
+                          <ThemedText
+                            style={{
+                              justifyContent: "center",
+                              alignContent: "flex-end",
+                              textAlign: "right",
+                              paddingHorizontal: 10,
+                              borderLeftWidth: StyleSheet.hairlineWidth,
+                              borderLeftColor: colorReactiveInverted,
+                            }}
+                          >
+                            {item.resultado}
+                          </ThemedText>
+                        </ThemedView>
+                      )}
+                    />
+                  </ThemedView>
                 </ThemedView>
               )
             }

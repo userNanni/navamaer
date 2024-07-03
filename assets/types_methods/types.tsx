@@ -40,8 +40,16 @@ export interface sportsTypes {
   modalidade: string;
   prova: string;
   coletivo: boolean;
-  resultados: JSON;
+  resultados: resultados[];
   updated: string;
+}
+
+export interface resultados {
+  [key: string]: any;
+  id: number;
+  nome: string;
+  escola: string;
+  resultado: string;
 }
 
 export function compare(a: escolasTypes, b: escolasTypes) {
