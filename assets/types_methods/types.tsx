@@ -1,3 +1,5 @@
+import { ImageSourcePropType } from "react-native";
+
 export interface pointsTypes {
   [key: string]: any;
   collectionId: string;
@@ -13,7 +15,7 @@ export interface escolasTypes {
   [key: string]: any;
   id: number;
   name: string;
-  imageSource: string;
+  imageSource: ImageSourcePropType;
   pointsTotal: number;
 }
 

@@ -10,6 +10,8 @@ import { WebView } from "react-native-webview";
 
 export default function HomeScreen() {
   const safeArea = useSafeAreaFrame();
+  const theme = useColorScheme();
+  const colorReactiveInverted = theme == "dark" ? "#e2e2e2" : "#252728";
 
   return (
     <ParallaxScrollView
@@ -41,7 +43,7 @@ export default function HomeScreen() {
       </ThemedView>
 
       <ThemedView style={[styles.stepContainer, styles.firstStepContainer]}>
-        <ThemedText>
+        <ThemedText style={{ textAlign: "justify" }}>
           Navamaer é uma competição entre as três escolas de formação de
           oficiais de carreira das Forças Armadas do Brasil: Escola Naval (EN),
           Academia Militar das Agulhas Negras (AMAN) e Academia da Força Aérea
@@ -53,26 +55,51 @@ export default function HomeScreen() {
         <ThemedText type="subtitle" style={styles.subtitle}>
           AFA 2024
         </ThemedText>
-        <ThemedText style={styles.subtitleWithIndent}>
+        <ThemedText style={{}}>
           Este ano a competição será realizada na Academia da Força Aérea,
           localizada em Pirassununga - SP, de 19 a 26 de Julho de 2024.
         </ThemedText>
       </ThemedView>
 
-      <ThemedView style={[styles.calendarContainer, styles.stepContainer]}>
+      <ThemedView
+        style={[
+          styles.calendarContainer,
+          styles.stepContainer,
+          {
+            shadowColor: colorReactiveInverted,
+            minHeight: safeArea.height / 2,
+          },
+        ]}
+      >
         <ThemedText type="subtitle" style={styles.subtitle}>
           Cronograma
         </ThemedText>
         <WebView
+          nestedScrollEnabled
           source={{
             uri: "https://calendar.google.com/calendar/u/0/embed?height=300&wkst=1&ctz=America/Sao_Paulo&bgcolor=%23ffffff&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&mode=AGENDA&hl=pt_BR&src=bHZpLm5hdmFtYWVyLmFmYUBnbWFpbC5jb20&color=%23039BE5",
           }}
           style={styles.calendar}
         />
       </ThemedView>
-
-      <ThemedView style={styles.stepContainerPatrocinadores}>
-        <ThemedText type="subtitle" style={styles.subtitle}>
+      <ThemedView
+        style={[
+          styles.stepContainerPatrocinadores,
+          {
+            padding: 12,
+            borderRadius: 16,
+            backgroundColor: "#fff",
+            shadowColor: colorReactiveInverted,
+            shadowOpacity: 0.4,
+            shadowRadius: 8,
+            elevation: 5,
+          },
+        ]}
+      >
+        <ThemedText
+          type="subtitle"
+          style={[styles.subtitle, { color: "#252728" }]}
+        >
           Patrocinadores
         </ThemedText>
 
@@ -86,16 +113,21 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  bannerImage: { width: "100%", height: "100%", objectFit: "cover" },
+  bannerImage: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    alignItems: "center",
+    alignSelf: "center",
+  },
   titleContainer: {
     alignItems: "center",
   },
   stepContainer: {
     gap: 8,
-    marginBottom: 30,
   },
   firstStepContainer: {
-    marginTop: 40, //Aumenta o espaçamento entre a logo da NAMAVAER e o primeiro texto
+    marginTop: 40,
   },
   navamaerLogo: {
     objectFit: "scale-down",
@@ -103,7 +135,7 @@ const styles = StyleSheet.create({
   },
   patrocinadores: {
     width: "100%",
-    height: 100,
+    height: 50,
     resizeMode: "contain",
   },
   stepContainerPatrocinadores: {
@@ -112,18 +144,13 @@ const styles = StyleSheet.create({
   subtitle: {
     textAlign: "center",
   },
-  subtitleWithIndent: {
-    textIndent: 20,
-  },
   calendarContainer: {
-    height: 300,
-    marginVertical: 20,
-    borderRadius: 10,
+    height: "auto",
+    paddingTop: 8,
+    borderRadius: 16,
     overflow: "hidden",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowOpacity: 0.4,
+    shadowRadius: 8,
     elevation: 5,
   },
   calendar: {

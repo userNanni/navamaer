@@ -77,13 +77,14 @@ export default function Podium() {
             estimatedItemSize={20}
             renderItem={({ item }) =>
               item.coletivo ? (
-                <ThemedView
-                  style={[
-                    styles.stepContainer,
-                    { borderRadius: 12, padding: 6 },
-                  ]}
-                >
-                  <ThemedView style={{ flexDirection: "column" }}>
+                <ThemedView style={[{ borderRadius: 12, padding: 6 }]}>
+                  <ThemedView
+                    style={{
+                      flexDirection: "row",
+                      paddingVertical: 6,
+                      justifyContent: "space-between",
+                    }}
+                  >
                     <ThemedText
                       type="subtitle"
                       style={{
@@ -94,7 +95,9 @@ export default function Podium() {
                       {item.modalidade}
                     </ThemedText>
                     <ThemedText
+                      type="defaultSemiBold"
                       style={{
+                        textAlign: "right",
                         alignSelf: "flex-end",
                         justifyContent: "center",
                       }}
@@ -113,6 +116,7 @@ export default function Podium() {
                     <FlashList
                       data={item.resultados}
                       keyExtractor={(item) => item.id.toString()}
+                      estimatedItemSize={2}
                       renderItem={({ item }) =>
                         0 == item.id ? (
                           <ThemedView
@@ -182,13 +186,14 @@ export default function Podium() {
                   </ThemedView>
                 </ThemedView>
               ) : (
-                <ThemedView
-                  style={[
-                    styles.stepContainer,
-                    { borderRadius: 12, padding: 6 },
-                  ]}
-                >
-                  <ThemedView style={{ flexDirection: "column" }}>
+                <ThemedView style={[{ borderRadius: 12, padding: 6 }]}>
+                  <ThemedView
+                    style={{
+                      flexDirection: "row",
+                      paddingVertical: 6,
+                      justifyContent: "space-between",
+                    }}
+                  >
                     <ThemedText
                       type="subtitle"
                       style={{
@@ -199,7 +204,9 @@ export default function Podium() {
                       {item.modalidade}
                     </ThemedText>
                     <ThemedText
+                      type="defaultSemiBold"
                       style={{
+                        textAlign: "right",
                         alignSelf: "flex-end",
                         justifyContent: "center",
                       }}
@@ -215,19 +222,84 @@ export default function Podium() {
                       borderWidth: StyleSheet.hairlineWidth,
                     }}
                   >
+                    <ThemedView
+                      style={{
+                        flexDirection: "row",
+
+                        borderBottomColor: colorReactiveInverted,
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                      }}
+                    >
+                      <ThemedText
+                        type="defaultSemiBold"
+                        style={{
+                          width: safeArea.width / 12,
+                          justifyContent: "center",
+                          alignContent: "center",
+                          textAlign: "center",
+                        }}
+                      >
+                        Nº
+                      </ThemedText>
+                      <ThemedText
+                        type="defaultSemiBold"
+                        style={{
+                          minWidth: (safeArea.width * 5) / 12,
+                          justifyContent: "center",
+                          alignContent: "center",
+                          textAlign: "center",
+                          paddingHorizontal: 10,
+                          borderLeftWidth: StyleSheet.hairlineWidth,
+                          borderLeftColor: colorReactiveInverted,
+                        }}
+                      >
+                        Nome
+                      </ThemedText>
+                      <ThemedText
+                        type="defaultSemiBold"
+                        style={{
+                          minWidth: safeArea.width / 7,
+                          justifyContent: "center",
+                          alignContent: "center",
+                          textAlign: "center",
+                          paddingHorizontal: 10,
+                          borderLeftWidth: StyleSheet.hairlineWidth,
+                          borderLeftColor: colorReactiveInverted,
+                        }}
+                      >
+                        Escola
+                      </ThemedText>
+                      <ThemedText
+                        type="defaultSemiBold"
+                        style={{
+                          minWidth: safeArea.width / 7,
+                          justifyContent: "center",
+                          alignContent: "center",
+                          textAlign: "center",
+                          paddingHorizontal: 10,
+                          borderLeftWidth: StyleSheet.hairlineWidth,
+                          borderLeftColor: colorReactiveInverted,
+                        }}
+                      >
+                        Pontos
+                      </ThemedText>
+                    </ThemedView>
                     <FlashList
                       data={item.resultados}
                       keyExtractor={(item) => item.id.toString()}
+                      estimatedItemSize={8}
                       renderItem={({ item }) => (
                         <ThemedView
                           style={{
                             flexDirection: "row",
                             minWidth: (safeArea.width * 5) / 6,
+                            borderBottomColor: colorReactiveInverted,
+                            borderBottomWidth: StyleSheet.hairlineWidth,
                           }}
                         >
                           <ThemedText
                             style={{
-                              width: "auto",
+                              width: safeArea.width / 12,
                               justifyContent: "center",
                               alignContent: "center",
                               textAlign: "center",
@@ -252,7 +324,7 @@ export default function Podium() {
                           </ThemedText>
                           <ThemedText
                             style={{
-                              minWidth: safeArea.width / 6,
+                              minWidth: safeArea.width / 7,
                               justifyContent: "center",
                               alignContent: "center",
                               textAlign: "center",
@@ -265,7 +337,8 @@ export default function Podium() {
                           </ThemedText>
                           <ThemedText
                             style={{
-                              justifyContent: "center",
+                              minWidth: safeArea.width / 7,
+                              justifyContent: "flex-end",
                               alignContent: "flex-end",
                               textAlign: "right",
                               paddingHorizontal: 10,
@@ -301,17 +374,3 @@ export default function Podium() {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  headerImage: {
-    marginTop: 40,
-    color: "#808080",
-    justifyContent: "center",
-    alignSelf: "center",
-  },
-  titleContainer: {
-    flexDirection: "row",
-    gap: 8,
-  },
-  stepContainer: {},
-});

@@ -17,7 +17,7 @@ import PocketBase from "pocketbase";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { PBLink } from "@/assets/types_methods/databaselink";
+import { PBLink, images } from "@/assets/types_methods/databaselink";
 import {
   compare,
   escolasTypes,
@@ -59,7 +59,7 @@ export default function Podium() {
     {
       id: 1,
       name: "AFA",
-      imageSource: "@/assets/images/favicon.png",
+      imageSource: images.AFA,
       pointsTotal: points.reduce(function (acc, src) {
         return src.escola == "AFA" ? acc + src.pontos : acc;
       }, 0),
@@ -67,14 +67,14 @@ export default function Podium() {
     {
       id: 2,
       name: "EN",
-      imageSource: "@/assets/images/favicon.png",
+      imageSource: images.EN,
       pointsTotal: points.reduce(function (acc, src) {
         return src.escola == "EN" ? acc + src.pontos : acc;
       }, 0),
     },
     {
       id: 3,
-      imageSource: "@/assets/images/favicon.png",
+      imageSource: images.AMAN,
       name: "AMAN",
       pointsTotal: points.reduce(function (acc, src) {
         return src.escola == "AMAN" ? acc + src.pontos : acc;
@@ -123,7 +123,7 @@ export default function Podium() {
                         height: (safeArea.width - 64) / 4,
                         objectFit: "scale-down",
                       }}
-                      source={require("@/assets/images/favicon.png")}
+                      source={item.imageSource}
                     />
                   </View>
                   <View
