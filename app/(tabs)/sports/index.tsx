@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  StyleSheet,
-  View,
-  Text,
-  useColorScheme,
-} from "react-native";
+import { ActivityIndicator, StyleSheet, useColorScheme } from "react-native";
 
 import { FlashList } from "@shopify/flash-list";
 
@@ -27,15 +21,6 @@ export default function Podium() {
   const [loaded, setLoaded] = useState(false);
   const colorReactive = theme == "dark" ? "#252728" : "#e2e2e2";
   const colorReactiveInverted = theme == "dark" ? "#e2e2e2" : "#252728";
-
-  const renderItem = ({ item }: resultados) => (
-    <ThemedView>
-      <ThemedText>{item.id}</ThemedText>
-      <ThemedText>{item.nome}</ThemedText>
-      <ThemedText>{item.escola}</ThemedText>
-      <ThemedText>{item.resultado}</ThemedText>
-    </ThemedView>
-  );
 
   const fetchData = async () => {
     try {
@@ -63,300 +48,320 @@ export default function Podium() {
     return (
       <ThemedView
         style={{
-          paddingTop: 64,
+          paddingTop: 32,
           flex: 1,
-          padding: 32,
-          gap: 16,
-          overflow: "hidden",
+          minHeight: safeArea.height - 128,
+          overflow: "visible",
         }}
       >
-        <ThemedText type="title">Esportes</ThemedText>
-        <ThemedView style={{ height: "100%" }}>
-          <FlashList
-            data={sports}
-            estimatedItemSize={20}
-            renderItem={({ item }) =>
-              item.coletivo ? (
-                <ThemedView style={[{ borderRadius: 12, padding: 6 }]}>
-                  <ThemedView
-                    style={{
-                      flexDirection: "row",
-                      paddingVertical: 6,
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <ThemedText
-                      type="subtitle"
-                      style={{
-                        alignSelf: "flex-start",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {item.modalidade}
-                    </ThemedText>
-                    <ThemedText
-                      type="defaultSemiBold"
-                      style={{
-                        textAlign: "right",
-                        alignSelf: "flex-end",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {item.prova}
-                    </ThemedText>
-                  </ThemedView>
+        <ThemedText
+          style={{ padding: 32}}
+          type="title"
+        >
+          Esportes
+        </ThemedText>
 
-                  <ThemedView
+        <FlashList
+          data={sports}
+          estimatedItemSize={20}
+          style={{ flex: 1 }}
+          renderItem={({ item }) =>
+            item.coletivo ? (
+              <ThemedView
+                style={[
+                  {
+                    alignSelf: "center",
+                    width: safeArea.width - 64,
+                    marginVertical: 10,
+                    borderRadius: 12,
+                    padding: 12,
+                    shadowColor: colorReactiveInverted,
+                    shadowOpacity: 0.4,
+                    shadowRadius: 8,
+                    elevation: 5,
+                  },
+                ]}
+              >
+                <ThemedView
+                  style={{
+                    flexDirection: "row",
+                    paddingVertical: 6,
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <ThemedText
+                    type="subtitle"
                     style={{
-                      backgroundColor: colorReactive,
-                      borderColor: colorReactiveInverted,
-                      borderWidth: StyleSheet.hairlineWidth,
+                      alignSelf: "flex-start",
+                      justifyContent: "center",
                     }}
                   >
-                    <FlashList
-                      data={item.resultados}
-                      keyExtractor={(item) => item.id.toString()}
-                      estimatedItemSize={2}
-                      renderItem={({ item }) =>
-                        0 == item.id ? (
-                          <ThemedView
-                            style={{
-                              flexDirection: "row",
-                              minWidth: (safeArea.width * 5) / 6,
-                            }}
-                          >
-                            <ThemedText
-                              style={{
-                                minWidth: safeArea.width / 6,
-                                justifyContent: "center",
-                                alignContent: "center",
-                                textAlign: "center",
-                                borderLeftWidth: StyleSheet.hairlineWidth,
-                                borderLeftColor: colorReactiveInverted,
-                              }}
-                            >
-                              {item.escola}
-                            </ThemedText>
-                            <ThemedText
-                              style={{
-                                justifyContent: "center",
-                                alignContent: "center",
-                                textAlign: "center",
-                                borderLeftWidth: StyleSheet.hairlineWidth,
-                                borderLeftColor: colorReactiveInverted,
-                              }}
-                            >
-                              {item.resultado}
-                            </ThemedText>
-                          </ThemedView>
-                        ) : (
-                          <ThemedView
-                            style={{
-                              flexDirection: "row",
-                              minWidth: (safeArea.width * 5) / 6,
-                            }}
-                          >
-                            <ThemedText
-                              style={{
-                                justifyContent: "center",
-                                alignContent: "center",
-                                textAlign: "center",
-                                borderLeftWidth: StyleSheet.hairlineWidth,
-                                borderLeftColor: colorReactiveInverted,
-                              }}
-                            >
-                              {item.resultado}
-                            </ThemedText>
-                            <ThemedText
-                              style={{
-                                minWidth: safeArea.width / 6,
-                                justifyContent: "center",
-                                alignContent: "center",
-                                textAlign: "center",
-                                borderLeftWidth: StyleSheet.hairlineWidth,
-                                borderLeftColor: colorReactiveInverted,
-                              }}
-                            >
-                              {item.escola}
-                            </ThemedText>
-                          </ThemedView>
-                        )
-                      }
-                    />
-                  </ThemedView>
+                    {item.modalidade}
+                  </ThemedText>
+                  <ThemedText
+                    type="defaultSemiBold"
+                    style={{
+                      textAlign: "right",
+                      alignSelf: "flex-end",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {item.prova}
+                  </ThemedText>
                 </ThemedView>
-              ) : (
-                <ThemedView style={[{ borderRadius: 12, padding: 6 }]}>
-                  <ThemedView
-                    style={{
-                      flexDirection: "row",
-                      paddingVertical: 6,
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <ThemedText
-                      type="subtitle"
-                      style={{
-                        alignSelf: "flex-start",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {item.modalidade}
-                    </ThemedText>
-                    <ThemedText
-                      type="defaultSemiBold"
-                      style={{
-                        textAlign: "right",
-                        alignSelf: "flex-end",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {item.prova}
-                    </ThemedText>
-                  </ThemedView>
-
-                  <ThemedView
-                    style={{
-                      backgroundColor: colorReactive,
-                      borderColor: colorReactiveInverted,
-                      borderWidth: StyleSheet.hairlineWidth,
-                    }}
-                  >
-                    <ThemedView
-                      style={{
-                        flexDirection: "row",
-
-                        borderBottomColor: colorReactiveInverted,
-                        borderBottomWidth: StyleSheet.hairlineWidth,
-                      }}
-                    >
-                      <ThemedText
-                        type="defaultSemiBold"
-                        style={{
-                          width: safeArea.width / 12,
-                          justifyContent: "center",
-                          alignContent: "center",
-                          textAlign: "center",
-                        }}
-                      >
-                        Nº
-                      </ThemedText>
-                      <ThemedText
-                        type="defaultSemiBold"
-                        style={{
-                          minWidth: (safeArea.width * 5) / 12,
-                          justifyContent: "center",
-                          alignContent: "center",
-                          textAlign: "center",
-                          paddingHorizontal: 10,
-                          borderLeftWidth: StyleSheet.hairlineWidth,
-                          borderLeftColor: colorReactiveInverted,
-                        }}
-                      >
-                        Nome
-                      </ThemedText>
-                      <ThemedText
-                        type="defaultSemiBold"
-                        style={{
-                          minWidth: safeArea.width / 7,
-                          justifyContent: "center",
-                          alignContent: "center",
-                          textAlign: "center",
-                          paddingHorizontal: 10,
-                          borderLeftWidth: StyleSheet.hairlineWidth,
-                          borderLeftColor: colorReactiveInverted,
-                        }}
-                      >
-                        Escola
-                      </ThemedText>
-                      <ThemedText
-                        type="defaultSemiBold"
-                        style={{
-                          minWidth: safeArea.width / 7,
-                          justifyContent: "center",
-                          alignContent: "center",
-                          textAlign: "center",
-                          paddingHorizontal: 10,
-                          borderLeftWidth: StyleSheet.hairlineWidth,
-                          borderLeftColor: colorReactiveInverted,
-                        }}
-                      >
-                        Pontos
-                      </ThemedText>
-                    </ThemedView>
-                    <FlashList
-                      data={item.resultados}
-                      keyExtractor={(item) => item.id.toString()}
-                      estimatedItemSize={8}
-                      renderItem={({ item }) => (
+                <ThemedView
+                  style={{
+                    backgroundColor: colorReactive,
+                    flexDirection: "row",
+                  }}
+                >
+                  <FlashList
+                    data={item.resultados}
+                    keyExtractor={(item) => item.id.toString()}
+                    numColumns={2}
+                    style={{ display: "flex", flexDirection: "row", flex: 1 }}
+                    estimatedItemSize={2}
+                    renderItem={({ item }) =>
+                      0 == item.id ? (
                         <ThemedView
                           style={{
+                            paddingVertical: 3,
+                            paddingHorizontal: 12,
+                            backgroundColor: colorReactive,
+                            borderRadius: 6,
                             flexDirection: "row",
-                            minWidth: (safeArea.width * 5) / 6,
-                            borderBottomColor: colorReactiveInverted,
-                            borderBottomWidth: StyleSheet.hairlineWidth,
+                            flex: 1,
                           }}
                         >
                           <ThemedText
+                            type="defaultSemiBold"
                             style={{
-                              width: safeArea.width / 12,
-                              justifyContent: "center",
-                              alignContent: "center",
+                              flex: 1,
+                              width: safeArea.width / 6,
                               textAlign: "center",
-                              paddingHorizontal: 10,
-                            }}
-                          >
-                            {item.id + 1}
-                            {"º"}
-                          </ThemedText>
-                          <ThemedText
-                            style={{
-                              minWidth: (safeArea.width * 5) / 12,
-                              justifyContent: "center",
-                              alignContent: "center",
-                              textAlign: "center",
-                              paddingHorizontal: 10,
-                              borderLeftWidth: StyleSheet.hairlineWidth,
-                              borderLeftColor: colorReactiveInverted,
-                            }}
-                          >
-                            {item.nome}
-                          </ThemedText>
-                          <ThemedText
-                            style={{
-                              minWidth: safeArea.width / 7,
-                              justifyContent: "center",
-                              alignContent: "center",
-                              textAlign: "center",
-                              paddingHorizontal: 10,
-                              borderLeftWidth: StyleSheet.hairlineWidth,
-                              borderLeftColor: colorReactiveInverted,
                             }}
                           >
                             {item.escola}
                           </ThemedText>
                           <ThemedText
+                            type="subtitle"
                             style={{
-                              minWidth: safeArea.width / 7,
-                              justifyContent: "flex-end",
-                              alignContent: "flex-end",
+                              flex: 1,
                               textAlign: "right",
-                              paddingHorizontal: 10,
-                              borderLeftWidth: StyleSheet.hairlineWidth,
-                              borderLeftColor: colorReactiveInverted,
                             }}
                           >
                             {item.resultado}
                           </ThemedText>
                         </ThemedView>
-                      )}
-                    />
-                  </ThemedView>
+                      ) : (
+                        <ThemedView
+                          style={{
+                            paddingVertical: 3,
+                            paddingHorizontal: 12,
+                            flexDirection: "row",
+                            flex: 1,
+                          }}
+                        >
+                          <ThemedText
+                            type="subtitle"
+                            style={{
+                              flex: 1,
+                              textAlign: "left",
+                            }}
+                          >
+                            {item.resultado}
+                          </ThemedText>
+                          <ThemedText
+                            type="defaultSemiBold"
+                            style={{
+                              flex: 1,
+                              width: safeArea.width / 6,
+                              textAlign: "center",
+                            }}
+                          >
+                            {item.escola}
+                          </ThemedText>
+                        </ThemedView>
+                      )
+                    }
+                  />
                 </ThemedView>
-              )
-            }
-          />
-        </ThemedView>
+              </ThemedView>
+            ) : (
+              <ThemedView
+                style={[
+                  {
+                    marginVertical: 10,
+                    alignSelf: "center",
+                    width: safeArea.width - 64,
+                    borderRadius: 12,
+                    padding: 12,
+                    shadowColor: colorReactiveInverted,
+                    shadowOpacity: 0.4,
+                    shadowRadius: 8,
+                    elevation: 5,
+                  },
+                ]}
+              >
+                <ThemedView
+                  style={{
+                    flexDirection: "row",
+                    paddingVertical: 6,
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <ThemedText
+                    type="subtitle"
+                    style={{
+                      alignSelf: "flex-start",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {item.modalidade}
+                  </ThemedText>
+                  <ThemedText
+                    type="defaultSemiBold"
+                    style={{
+                      textAlign: "right",
+                      alignSelf: "flex-end",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {item.prova}
+                  </ThemedText>
+                </ThemedView>
+
+                <ThemedView style={{ borderRadius: 6 }}>
+                  <ThemedView
+                    style={{
+                      flexDirection: "row",
+                      backgroundColor: colorReactive,
+                    }}
+                  >
+                    <ThemedText
+                      type="defaultSemiBold"
+                      style={{
+                        width: safeArea.width / 12,
+                        justifyContent: "center",
+                        alignContent: "center",
+                        textAlign: "center",
+                      }}
+                    >
+                      Nº
+                    </ThemedText>
+                    <ThemedText
+                      type="defaultSemiBold"
+                      style={{
+                        minWidth: (safeArea.width * 5) / 12,
+                        justifyContent: "center",
+                        alignContent: "center",
+                        textAlign: "center",
+                        paddingHorizontal: 10,
+                        borderLeftWidth: StyleSheet.hairlineWidth,
+                        borderLeftColor: colorReactiveInverted,
+                      }}
+                    >
+                      Nome
+                    </ThemedText>
+                    <ThemedText
+                      type="defaultSemiBold"
+                      style={{
+                        minWidth: safeArea.width / 7,
+                        justifyContent: "center",
+                        alignContent: "center",
+                        textAlign: "center",
+                        paddingHorizontal: 10,
+                        borderLeftWidth: StyleSheet.hairlineWidth,
+                        borderLeftColor: colorReactiveInverted,
+                      }}
+                    >
+                      Escola
+                    </ThemedText>
+                    <ThemedText
+                      type="defaultSemiBold"
+                      style={{
+                        minWidth: safeArea.width / 7,
+                        justifyContent: "center",
+                        alignContent: "center",
+                        textAlign: "center",
+                        paddingHorizontal: 10,
+                        borderLeftWidth: StyleSheet.hairlineWidth,
+                        borderLeftColor: colorReactiveInverted,
+                      }}
+                    >
+                      Pontos
+                    </ThemedText>
+                  </ThemedView>
+                  <FlashList
+                    data={item.resultados}
+                    keyExtractor={(item) => item.id.toString()}
+                    estimatedItemSize={8}
+                    renderItem={({ item }) => (
+                      <ThemedView
+                        style={{
+                          flexDirection: "row",
+                          flex: 1,
+                        }}
+                      >
+                        <ThemedText
+                          style={{
+                            width: safeArea.width / 12,
+                            justifyContent: "center",
+                            alignContent: "center",
+                            textAlign: "center",
+                            paddingHorizontal: 10,
+                          }}
+                        >
+                          {item.id + 1}
+                          {"º"}
+                        </ThemedText>
+                        <ThemedText
+                          style={{
+                            minWidth: (safeArea.width * 5) / 12,
+                            justifyContent: "center",
+                            alignContent: "center",
+                            textAlign: "center",
+                            paddingHorizontal: 10,
+                            borderLeftWidth: StyleSheet.hairlineWidth,
+                            borderLeftColor: colorReactiveInverted,
+                          }}
+                        >
+                          {item.nome}
+                        </ThemedText>
+                        <ThemedText
+                          style={{
+                            minWidth: safeArea.width / 7,
+                            justifyContent: "center",
+                            alignContent: "center",
+                            textAlign: "center",
+                            paddingHorizontal: 10,
+                            borderLeftWidth: StyleSheet.hairlineWidth,
+                            borderLeftColor: colorReactiveInverted,
+                          }}
+                        >
+                          {item.escola}
+                        </ThemedText>
+                        <ThemedText
+                          style={{
+                            minWidth: safeArea.width / 7,
+                            justifyContent: "flex-end",
+                            alignContent: "flex-end",
+                            textAlign: "right",
+                            paddingHorizontal: 10,
+                            borderLeftWidth: StyleSheet.hairlineWidth,
+                            borderLeftColor: colorReactiveInverted,
+                          }}
+                        >
+                          {item.resultado}
+                        </ThemedText>
+                      </ThemedView>
+                    )}
+                  />
+                </ThemedView>
+              </ThemedView>
+            )
+          }
+        />
       </ThemedView>
     );
   } else {

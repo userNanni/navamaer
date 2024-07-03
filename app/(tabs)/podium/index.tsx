@@ -32,6 +32,7 @@ export default function Podium() {
   const theme = useColorScheme();
   const [loaded, setLoaded] = useState(false);
   const colorReactive = theme == "dark" ? "#252728" : "#e2e2e2";
+  const colorReactiveInverted = theme == "dark" ? "#e2e2e2" : "#252728";
 
   const fetchData = async () => {
     try {
@@ -86,17 +87,31 @@ export default function Podium() {
       <ParallaxScrollView
         headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
         headerImage={
-          <Ionicons size={200} name="trophy" style={styles.headerImage} />
+          <Image
+            source={require("@/assets/images/banner.jpg")}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              alignItems: "center",
+              alignSelf: "center",
+            }}
+          />
         }
       >
-        <ThemedText type="title">Pódio</ThemedText>
-        <ThemedView style={{ flex: 1, height: "100%" }}>
+        <ThemedText
+          type="title"
+          style={{ paddingHorizontal: 32, paddingTop: 32 }}
+        >
+          Pódio
+        </ThemedText>
+        <ThemedView style={{ flex: 1, height: "100%", marginBottom: 32 }}>
           <FlashList
             data={escolas}
             estimatedItemSize={20}
             renderItem={({ item }) => (
               <Link
-                style={{ marginVertical: 8 }}
+                style={{ marginVertical: 8, alignSelf: "center" }}
                 key={item.id}
                 href={{
                   pathname: "/podium/[id]",
@@ -114,6 +129,10 @@ export default function Podium() {
                     paddingHorizontal: 24,
                     borderRadius: safeArea.width / 50 + 8,
                     alignItems: "center",
+                    shadowColor: colorReactiveInverted,
+                    shadowOpacity: 0.4,
+                    shadowRadius: 8,
+                    elevation: 5,
                   }}
                 >
                   <View style={{ marginBottom: 12 }}>

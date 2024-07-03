@@ -24,6 +24,7 @@ export default function News() {
   const theme = useColorScheme();
   const [loaded, setLoaded] = useState(false);
   const colorReactive = theme == "dark" ? "#252728" : "#e2e2e2";
+  const colorReactiveInverted = theme == "dark" ? "#e2e2e2" : "#252728";
 
   const fetchData = async () => {
     try {
@@ -58,7 +59,7 @@ export default function News() {
           renderItem={({ item }) => (
             <Link
               key={item.id}
-              style={styles.article}
+              style={[styles.article, { alignSelf: "center" }]}
               href={{
                 pathname: "/news/[id]",
                 params: {
@@ -83,6 +84,12 @@ export default function News() {
                     width: safeArea.width - 64,
                     padding: 8,
                     borderRadius: safeArea.width / 50 + 8,
+                  },
+                  {
+                    shadowColor: colorReactiveInverted,
+                    shadowOpacity: 0.4,
+                    shadowRadius: 8,
+                    elevation: 5,
                   },
                 ]}
               >
@@ -145,8 +152,6 @@ export default function News() {
 const styles = StyleSheet.create({
   newsView: {
     flex: 1,
-    paddingLeft: 32,
-    paddingRight: 32,
     gap: 16,
   },
   article: {

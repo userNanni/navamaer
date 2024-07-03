@@ -48,6 +48,7 @@ export default function Article() {
         style={{
           gap: 8,
           flexDirection: "column",
+          padding: 32,
         }}
       >
         <ThemedView

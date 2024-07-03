@@ -11,5 +11,5 @@ interface images {
 export const images: images = {
   EN: require("../images/EN.png"),
   AFA: require("../images/AFA.png"),
-  AMAN: require("../images/AMAN.jpeg"),
+  AMAN: require("../images/AMAN.png"),
 };
