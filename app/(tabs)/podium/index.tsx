@@ -142,6 +142,7 @@ export default function Podium() {
                         width: safeArea.width - 80,
                         height: safeArea.width - 80,
                         resizeMode: "cover",
+                        borderRadius: 10,
                       }}
                       source={item.imageSource}
                     />
