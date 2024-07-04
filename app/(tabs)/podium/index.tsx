@@ -77,6 +77,7 @@ export default function Podium() {
       }, 0),
     },
   ].sort(compare);
+
   if (loaded) {
     return (
       <ParallaxScrollView
@@ -87,7 +88,7 @@ export default function Podium() {
             style={{
               width: "100%",
               height: "100%",
-              objectFit: "cover",
+              resizeMode: "cover",
               alignItems: "center",
               alignSelf: "center",
             }}
@@ -120,8 +121,8 @@ export default function Podium() {
                     gap: 8,
                     backgroundColor: colorReactive,
                     width: safeArea.width - 64,
-                    padding: 16,
-                    paddingHorizontal: 24,
+                    padding: 12,
+                    paddingHorizontal: 16,
                     borderRadius: safeArea.width / 50 + 8,
                     alignItems: "center",
                     shadowColor: colorReactiveInverted,
@@ -130,12 +131,13 @@ export default function Podium() {
                     elevation: 5,
                   }}
                 >
-                  <View style={{ marginBottom: 12 }}>
+                  <View style={{ marginBottom: 8 }}>
                     <Image
                       style={{
-                        width: (safeArea.width - 64) / 4,
-                        height: (safeArea.width - 64) / 4,
-                        objectFit: "scale-down",
+                        width: safeArea.width - 80,
+                        height: safeArea.width - 80,
+                        resizeMode: "cover",
+                        borderRadius: 11,
                       }}
                       source={item.imageSource}
                     />
@@ -145,7 +147,7 @@ export default function Podium() {
                       borderTopWidth: StyleSheet.hairlineWidth,
                       borderTopColor: colorReactive,
                       gap: 2,
-                      paddingTop: 12,
+                      paddingTop: 8,
                       width: "100%",
                       flexDirection: "row",
                       justifyContent: "space-between",
