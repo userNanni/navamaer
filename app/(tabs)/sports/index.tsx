@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet, useColorScheme } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { FlashList } from "@shopify/flash-list";
 
@@ -10,17 +10,20 @@ import { ThemedView } from "@/components/ThemedView";
 
 import { PBLink } from "@/assets/types_methods/databaselink";
 
-import { sportsTypes, resultados } from "@/assets/types_methods/types";
+import { sportsTypes } from "@/assets/types_methods/types";
+
+import {
+  colorReactive,
+  colorReactiveInverted,
+  } from "@/constants/Colors";
+import Loading from "@/components/Loading";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 const pb = new PocketBase(PBLink);
 
 export default function Podium() {
   const safeArea = useSafeAreaFrame();
-  const theme = useColorScheme();
   const [loaded, setLoaded] = useState(false);
-  const colorReactive = theme == "dark" ? "#252728" : "#e2e2e2";
-  const colorReactiveInverted = theme == "dark" ? "#e2e2e2" : "#252728";
 
   const fetchData = async () => {
     try {
@@ -54,10 +57,7 @@ export default function Podium() {
           overflow: "visible",
         }}
       >
-        <ThemedText
-          style={{ padding: 32}}
-          type="title"
-        >
+        <ThemedText style={{ padding: 32 }} type="title">
           Esportes
         </ThemedText>
 
@@ -365,17 +365,6 @@ export default function Podium() {
       </ThemedView>
     );
   } else {
-    return (
-      <ThemedView
-        style={{
-          alignItems: "center",
-          justifyContent: "center",
-          width: safeArea.width,
-          height: safeArea.height,
-        }}
-      >
-        <ActivityIndicator size="large" color={colorReactive} />
-      </ThemedView>
-    );
+    return <Loading />;
   }
 }

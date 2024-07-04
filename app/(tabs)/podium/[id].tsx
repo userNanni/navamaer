@@ -1,4 +1,4 @@
-import { StyleSheet, useColorScheme } from "react-native";
+import { StyleSheet } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import PocketBase from "pocketbase";
@@ -10,14 +10,15 @@ const pb = new PocketBase(PBLink);
 import { pointsTypes, escolasTypes } from "@/assets/types_methods/types";
 import { useEffect, useState } from "react";
 import { FlashList } from "@shopify/flash-list";
+
+import { colorReactive } from "@/constants/Colors";
+import Loading from "@/components/Loading";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 export default function Points() {
   const { name } = useLocalSearchParams<escolasTypes>();
-  const safeArea = useSafeAreaFrame();
-  const theme = useColorScheme();
   const [loaded, setLoaded] = useState(false);
-  const colorReactive = theme == "dark" ? "#252728" : "#e2e2e2";
+  const safeArea = useSafeAreaFrame();
 
   const fetchData = async () => {
     try {
@@ -26,6 +27,7 @@ export default function Points() {
         filter: `escola="${name}"`,
       });
       setPoints(records);
+      setLoaded(true);
     } catch (error) {
       console.log(error);
     }
@@ -40,52 +42,55 @@ export default function Points() {
   });
 
   const [points, setPoints] = useState<pointsTypes[]>([]);
-
-  return (
-    <ThemedView
-      style={{
-        flex: 1,
-        padding: 32,
-        gap: 16,
-        overflow: "hidden",
-      }}
-    >
-      <Stack.Screen
-        options={{
-          title: name,
-          headerTitleAlign: "center",
-          headerTitleStyle: {
-            fontSize: 30,
-            fontWeight: "bold",
-          },
+  if (loaded) {
+    return (
+      <ThemedView
+        style={{
+          flex: 1,
+          padding: 32,
+          gap: 16,
+          overflow: "hidden",
         }}
-      />
-      <FlashList
-        data={points}
-        estimatedItemSize={20}
-        renderItem={({ item }) => (
-          <ThemedView
-            style={[
-              {
-                gap: 8,
-                marginVertical: 8,
-                backgroundColor: colorReactive,
-                width: safeArea.width - 64,
-                padding: 8,
-                paddingHorizontal: 16,
-                borderRadius: safeArea.width / 50 + 8,
-                flexDirection: "row",
-                justifyContent: "space-between",
-              },
-            ]}
-          >
-            <ThemedText type="subtitle">{item?.modalidade}</ThemedText>
-            <ThemedText type="subtitle">{item?.pontos}</ThemedText>
-          </ThemedView>
-        )}
-      />
-    </ThemedView>
-  );
+      >
+        <Stack.Screen
+          options={{
+            title: name,
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontSize: 30,
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <FlashList
+          data={points}
+          estimatedItemSize={20}
+          renderItem={({ item }) => (
+            <ThemedView
+              style={[
+                {
+                  gap: 8,
+                  marginVertical: 8,
+                  backgroundColor: colorReactive,
+                  width: safeArea.width - 64,
+                  padding: 8,
+                  paddingHorizontal: 16,
+                  borderRadius: safeArea.width / 50 + 8,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                },
+              ]}
+            >
+              <ThemedText type="subtitle">{item?.modalidade}</ThemedText>
+              <ThemedText type="subtitle">{item?.pontos}</ThemedText>
+            </ThemedView>
+          )}
+        />
+      </ThemedView>
+    );
+  } else {
+    return <Loading />;
+  }
 }
 
 const styles = StyleSheet.create({

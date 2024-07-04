@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Image,
-  View,
-  useColorScheme,
-  ActivityIndicator,
-} from "react-native";
+import { StyleSheet, Image, View } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Link } from "expo-router";
@@ -15,16 +9,16 @@ import { FlashList } from "@shopify/flash-list";
 
 import { PBLink } from "@/assets/types_methods/databaselink";
 import { newsTypes } from "@/assets/types_methods/types";
+
+import { colorReactive, colorReactiveInverted } from "@/constants/Colors";
+import Loading from "@/components/Loading";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 const pb = new PocketBase(PBLink);
 
 export default function News() {
-  const safeArea = useSafeAreaFrame();
-  const theme = useColorScheme();
   const [loaded, setLoaded] = useState(false);
-  const colorReactive = theme == "dark" ? "#252728" : "#e2e2e2";
-  const colorReactiveInverted = theme == "dark" ? "#e2e2e2" : "#252728";
+  const safeArea = useSafeAreaFrame();
 
   const fetchData = async () => {
     try {
@@ -134,18 +128,7 @@ export default function News() {
       </ThemedView>
     );
   } else {
-    return (
-      <ThemedView
-        style={{
-          alignItems: "center",
-          justifyContent: "center",
-          width: safeArea.width,
-          height: safeArea.height,
-        }}
-      >
-        <ActivityIndicator size="large" color={colorReactive} />
-      </ThemedView>
-    );
+    return <Loading />;
   }
 }
 

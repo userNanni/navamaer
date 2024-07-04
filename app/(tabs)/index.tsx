@@ -1,18 +1,20 @@
-import { Image, StyleSheet, Platform, useColorScheme } from "react-native";
+import { Image, StyleSheet } from "react-native";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { Colors } from "@/constants/Colors";
-import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 import { WebView } from "react-native-webview";
 
+import {
+  Colors,
+  colorReactiveInverted,
+  theme,
+} from "@/constants/Colors";
+import { useSafeAreaFrame } from "react-native-safe-area-context";
+
 export default function HomeScreen() {
   const safeArea = useSafeAreaFrame();
-  const theme = useColorScheme();
-  const colorReactiveInverted = theme == "dark" ? "#e2e2e2" : "#252728";
-
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -35,7 +37,7 @@ export default function HomeScreen() {
       >
         <Image
           source={
-            useColorScheme() == "dark"
+            theme == "dark"
               ? require("@/assets/images/logoDark.png")
               : require("@/assets/images/logoLight.png")
           }
