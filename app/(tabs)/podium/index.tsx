@@ -16,10 +16,7 @@ import {
   pointsTypes,
 } from "@/assets/types_methods/types";
 
-import {
-  colorReactive,
-  colorReactiveInverted,
-} from "@/constants/Colors";
+import { colorReactive, colorReactiveInverted } from "@/constants/Colors";
 import Loading from "@/components/Loading";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 
@@ -77,7 +74,6 @@ export default function Podium() {
       }, 0),
     },
   ].sort(compare);
-
   if (loaded) {
     return (
       <ParallaxScrollView
@@ -88,7 +84,7 @@ export default function Podium() {
             style={{
               width: "100%",
               height: "100%",
-              resizeMode: "cover",
+              objectFit: "cover",
               alignItems: "center",
               alignSelf: "center",
             }}
@@ -121,8 +117,8 @@ export default function Podium() {
                     gap: 8,
                     backgroundColor: colorReactive,
                     width: safeArea.width - 64,
-                    padding: 12,
-                    paddingHorizontal: 16,
+                    padding: 16,
+                    paddingHorizontal: 24,
                     borderRadius: safeArea.width / 50 + 8,
                     alignItems: "center",
                     shadowColor: colorReactiveInverted,
@@ -131,13 +127,12 @@ export default function Podium() {
                     elevation: 5,
                   }}
                 >
-                  <View style={{ marginBottom: 8 }}>
+                  <View style={{ marginBottom: 12 }}>
                     <Image
                       style={{
-                        width: safeArea.width - 80,
-                        height: safeArea.width - 80,
-                        resizeMode: "cover",
-                        borderRadius: 11,
+                        width: (safeArea.width - 64) / 4,
+                        height: (safeArea.width - 64) / 4,
+                        objectFit: "scale-down",
                       }}
                       source={item.imageSource}
                     />
@@ -147,7 +142,7 @@ export default function Podium() {
                       borderTopWidth: StyleSheet.hairlineWidth,
                       borderTopColor: colorReactive,
                       gap: 2,
-                      paddingTop: 8,
+                      paddingTop: 12,
                       width: "100%",
                       flexDirection: "row",
                       justifyContent: "space-between",
