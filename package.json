@@ -43,7 +43,8 @@
     "react-native-web": "~0.19.10",
     "react-native-webview": "^13.10.4",
     "tableComponent": "^3.3.0",
-    "undefined": "@expo/vector-icons/FontAwesome"
+    "undefined": "@expo/vector-icons/FontAwesome",
+    "expo-dev-client": "~4.0.20"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
