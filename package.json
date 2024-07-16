@@ -20,6 +20,7 @@
     "@shopify/flash-list": "1.6.4",
     "expo": "~51.0.14",
     "expo-constants": "~16.0.2",
+    "expo-dev-client": "~4.0.20",
     "expo-font": "~12.0.7",
     "expo-linking": "~6.3.1",
     "expo-router": "~3.5.16",
@@ -43,8 +44,7 @@
     "react-native-web": "~0.19.10",
     "react-native-webview": "^13.10.4",
     "tableComponent": "^3.3.0",
-    "undefined": "@expo/vector-icons/FontAwesome",
-    "expo-dev-client": "~4.0.20"
+    "undefined": "@expo/vector-icons/FontAwesome"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
