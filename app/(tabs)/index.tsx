@@ -80,13 +80,7 @@ export default function HomeScreen() {
           <ThemedText type="subtitle" style={styles.subtitle}>
             Cronograma
           </ThemedText>
-          <WebView
-            nestedScrollEnabled
-            source={{
-              uri: "https://calendar.google.com/calendar/u/0/embed?height=300&wkst=1&ctz=America/Sao_Paulo&bgcolor=%23ffffff&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&mode=AGENDA&hl=pt_BR&src=bHZpLm5hdmFtYWVyLmFmYUBnbWFpbC5jb20&color=%23039BE5",
-            }}
-            style={styles.calendar}
-          />
+         
         </ThemedView>
         <ThemedView
           style={[

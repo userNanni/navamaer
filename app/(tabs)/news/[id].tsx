@@ -7,7 +7,7 @@ import { Stack, useLocalSearchParams } from "expo-router";
 import HTMLRender from "react-native-render-html";
 import { newsTypes } from "@/assets/types_methods/types";
 
-import { Colors, theme } from "@/constants/Colors";
+import { Colors, theme, colorReactiveInverted } from "@/constants/Colors";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 export default function Article() {
@@ -53,10 +53,8 @@ export default function Article() {
       >
         <ThemedView
           style={[
-            theme == "light"
-              ? { borderBottomColor: "#151718" }
-              : { borderBottomColor: "#f2f2f2" },
             {
+              borderBottomColor: colorReactiveInverted,
               borderBottomWidth: StyleSheet.hairlineWidth,
               gap: 2,
               paddingBottom: 8,
