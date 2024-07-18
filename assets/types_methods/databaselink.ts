@@ -9,7 +9,7 @@ interface images {
 }
 
 export const images: images = {
-  EN: require("../images/EN2.png"),
-  AFA: require("../images/AFA2.png"),
-  AMAN: require("../images/AMAN2.png"),
+  EN: require("../images/EN.png"),
+  AFA: require("../images/AFA.png"),
+  AMAN: require("../images/AMAN.png"),
 };
