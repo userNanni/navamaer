@@ -11,7 +11,6 @@ import {
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { WebView } from "react-native-webview";
 import { Colors, colorReactiveInverted, theme } from "@/constants/Colors";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -23,6 +22,86 @@ if (
 ) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
+
+
+const cronogramaData = [
+  "- sexta-feira, 19 de julho",
+  "05:00h Chegada das Delegações na AFA",
+  "11:30h Almoço (SOMENTE PÚBLICO INTERNO)",
+  "13:30h Reunião de Abertura (1ª parte)",
+  "14:00h Reunião de Abertura (2ª parte)",
+  "15:00h Treinamento para a Cerimônia de Abertura (SOMENTE PÚBLICO INTERNO)",
+  "16:00h Cerimônia de Abertura",
+  "16:45h Futebol (Jogo 1)",
+  "19:15h Evento de Abertura (SOMENTE PÚBLICO INTERNO)",
+  "- sábado, 20 de julho",
+  "06:30h Orientação (Saída dos Ônibus)",
+  "08:00h Esgrima Feminino (Sabre Individual)",
+  "08:00h Esgrima Masculino (Espada Individual)",
+  "08:00h Orientação (Percurso Escola)",
+  "08:00h Pentatlo Militar (Tiro Controlado)",
+  "08:30h Atletismo (Dia 1)",
+  "11:30h Esgrima (Finais)",
+  "14:00h Esgrima (Espada Equipe)",
+  "14:30h Natação",
+  "19:00h Basquetebol (Jogo1 - AFA x AMAN)",
+  "- domingo, 21 de julho",
+  "08:00h Esgrima Feminino (Florete Individual)",
+  "08:00h Esgrima Masculino (Sabre Individual)",
+  "08:00h Pentatlo Militar (Tiro)",
+  "08:30h Atletismo (Dia 2)",
+  "10:30h Esgrima (Finais)",
+  "13:00h Esgrima Feminino (Florete Equipes)",
+  "13:00h Esgrima Masculino (Sabre Equipes)",
+  "14:30h Polo Aquático (Jogo 1: AFA x EN)",
+  "17:00h Culto",
+  "17:00h Espírita",
+  "17:00h Missa",
+  "19:00h Basquetebol (Jogo 2 - EN x Perdedor Jogo 1)",
+  "- segunda-feira, 22 de julho",
+  "06:30h Orientação (Saída dos Ônibus)",
+  "07:00h Judô (Pesagem)",
+  "08:00h Esgrima Feminino (Espada Individual)",
+  "08:00h Orientação (Percurso 1)",
+  "08:00h Esgrima Masculino (FloreteIndividual)",
+  "09:00h Tiro (Pistola de Ar)",
+  "09:00h Pentatlo Militar (Pista de Obstáculos)",
+  "11:30h Esgrima (Finais)",
+  "14:00h Esgrima Masculino (Florete Equipes)",
+  "14:30h Polo Aquático (Jogo 2: AMAN x Perdedor Jogo 1)",
+  "16:00h Futebol (Jogo 2 - AFA x Perdedor Jogo 1)",
+  "19:00h Basquetebol (Jogo 3 - EN x Vencedor Jogo 1)",
+  "- terça-feira, 23 de julho",
+  "07:00h Judô (Repesagem)",
+  "09:00h Pentatlo Militar (Lançamentos de Granadas)",
+  "09:00h Tiro (Carabina de Ar)",
+  "13:30h Judô (Equipes)",
+  "14:30h Polo Aquático (Jogo 3 - AMAN x Vencedor Jogo 1)",
+  "19:00h Voleibol (Jogo 1 - EN x AMAN)",
+  "- quarta-feira, 24 de julho",
+  "06:30h Orientação (Saída dos Ônibus)",
+  "07:00h Judô (Repesagem)",
+  "08:00h Tiro (Fogo Central)",
+  "08:00h Orientação (Percurso 2)",
+  "13:30h Judô (Individual)",
+  "15:00h Pentatlo Militar (Natação Utilitária)",
+  "19:00h Voleibol (Jogo 3)",
+  "- quinta-feira, 25 de julho",
+  "06:30h Orientação (Saída dos Ônibus)",
+  "08:00h Orientação (Percurso Reserva)",
+  "08:00h Tiro (Fuzil Standard)",
+  "09:00h Pentatlo Militar (Cross Country)",
+  "15:00h Triathlon",
+  "16:00h Futebol (Jogo 3 - AFA x Vencedor Jogo 1)",
+  "19:00h Voleibol (Jogo 3 - AFA x Vencedor Jogo 1)",
+  "- sexta-feira, 26 de julho",
+  "08:30h Reunião de Encerramento (SOMENTE PÚBLICO INTERNO)",
+  "09:30h Treinamento da Cerimônia de Encerramento",
+  "10:45h Cerimônia de Encerramento",
+  "11:30h Almoço de Confraternização (SOMENTE PÚBLICO INTERNO)",
+  "13:30h Regresso das Delegações",
+];
+
 
 export default function HomeScreen() {
   const safeArea = useSafeAreaFrame();
@@ -124,20 +203,35 @@ export default function HomeScreen() {
             </ThemedView>
           </Collapsible>
 
-          <ThemedView
-            style={[
-              styles.calendarContainer,
-              styles.stepContainer,
-              {
-                shadowColor: colorReactiveInverted,
-                minHeight: safeArea.height / 2,
-              },
-            ]}
-          >
-            <ThemedText type="subtitle" style={styles.subtitle}>
-              Cronograma
-            </ThemedText>
-          </ThemedView>
+          <Collapsible title={"Cronograma"}>
+              <ThemedView
+                style={{
+                  paddingVertical: 6,
+                  paddingHorizontal: 12,
+                  borderRadius: 12,
+                  shadowOpacity: 0.4,
+                  shadowRadius: 8,
+                  marginTop: 8,
+                  borderWidth: StyleSheet.hairlineWidth,
+                  borderColor: colorReactiveInverted,
+                }}
+              >
+                {cronogramaData.map((item, index) => (
+                <ThemedText
+                  key={index}
+                  style={[
+                    styles.cronogramaText,
+                    item.startsWith("- ") && styles.boldText,
+                  ]}
+                >
+                  {item}
+                </ThemedText>
+              ))}
+              </ThemedView>
+          </Collapsible>
+
+
+          
           <ThemedView
             style={[
               styles.stepContainerPatrocinadores,
@@ -255,5 +349,8 @@ const styles = StyleSheet.create({
     height: 200,
     resizeMode: "contain",
     marginTop: 8,
+  },
+  boldText: {
+    fontWeight: 'bold',
   },
 });
