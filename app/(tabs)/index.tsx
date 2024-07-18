@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   Image,
   StyleSheet,
-  View,
   TouchableOpacity,
   LayoutAnimation,
   Platform,
@@ -15,6 +14,8 @@ import { ThemedView } from "@/components/ThemedView";
 import { WebView } from "react-native-webview";
 import { Colors, colorReactiveInverted, theme } from "@/constants/Colors";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import { Collapsible } from "@/components/Collapsible";
 
 if (
   Platform.OS === "android" &&
@@ -92,26 +93,25 @@ export default function HomeScreen() {
               localizada em Pirassununga - SP, de 19 a 26 de Julho de 2024.
             </ThemedText>
           </ThemedView>
-
-          <TouchableOpacity onPress={toggleMap} style={styles.mapHeader}>
-            <ThemedText type="subtitle" style={styles.mapHeaderText}>
-              Mapa {showMap ? "(Ocultar)" : "(Exibir)"}
-            </ThemedText>
-          </TouchableOpacity>
-          {showMap && (
+          <Collapsible title={"Mapa"}>
             <Image
               source={require("@/assets/images/mapa.jpg")}
               style={styles.mapImage}
             />
-          )}
-
-          <TouchableOpacity onPress={togglePhones} style={styles.phoneHeader}>
-            <ThemedText type="subtitle" style={styles.phoneHeaderText}>
-              Telefones Úteis {showPhones ? "(Ocultar)" : "(Exibir)"}
-            </ThemedText>
-          </TouchableOpacity>
-          {showPhones && (
-            <ThemedView style={styles.phoneListContainer}>
+          </Collapsible>
+          <Collapsible title={"Telefones Úteis"}>
+            <ThemedView
+              style={{
+                paddingVertical: 6,
+                paddingHorizontal: 12,
+                borderRadius: 12,
+                shadowOpacity: 0.4,
+                shadowRadius: 8,
+                marginTop: 8,
+                borderWidth: StyleSheet.hairlineWidth,
+                borderColor: colorReactiveInverted,
+              }}
+            >
               <ThemedText>Oficial de Dia AFA – (19) 3565-7031</ThemedText>
               <ThemedText>Médico de Dia AFA – (19) 3565-7171</ThemedText>
               <ThemedText>Posto CAN – (19) 3565-7152</ThemedText>
@@ -122,49 +122,42 @@ export default function HomeScreen() {
                 Águia (autorização de acesso nos portões) – (19) 3565-7812
               </ThemedText>
             </ThemedView>
-          )}
+          </Collapsible>
 
-        <ThemedView
-          style={[
-            styles.calendarContainer,
-            styles.stepContainer,
-            {
-              shadowColor: colorReactiveInverted,
-              minHeight: safeArea.height / 2,
-            },
-          ]}
-        >
-          <ThemedText type="subtitle" style={styles.subtitle}>
-            Cronograma
-          </ThemedText>
-          <WebView
-            nestedScrollEnabled
-            source={{
-              uri: "https://calendar.google.com/calendar/u/0/embed?height=300&wkst=1&ctz=America/Sao_Paulo&bgcolor=%23ffffff&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&mode=AGENDA&hl=pt_BR&src=bHZpLm5hdmFtYWVyLmFmYUBnbWFpbC5jb20&color=%23039BE5",
-            }}
-            style={styles.calendar}
-          />
-        </ThemedView>
-        <ThemedView
-          style={[
-            styles.stepContainerPatrocinadores,
-            {
-              padding: 12,
-              borderRadius: 16,
-              backgroundColor: "#fff",
-              shadowColor: colorReactiveInverted,
-              shadowOpacity: 0.4,
-              shadowRadius: 8,
-              elevation: 5,
-            },
-          ]}
-        >
-          <ThemedText
-            type="subtitle"
-            style={[styles.subtitle, { color: "#252728" }]}
+          <ThemedView
+            style={[
+              styles.calendarContainer,
+              styles.stepContainer,
+              {
+                shadowColor: colorReactiveInverted,
+                minHeight: safeArea.height / 2,
+              },
+            ]}
           >
-            Patrocinadores
-          </ThemedText>
+            <ThemedText type="subtitle" style={styles.subtitle}>
+              Cronograma
+            </ThemedText>
+          </ThemedView>
+          <ThemedView
+            style={[
+              styles.stepContainerPatrocinadores,
+              {
+                padding: 12,
+                borderRadius: 16,
+                backgroundColor: "#fff",
+                shadowColor: colorReactiveInverted,
+                shadowOpacity: 0.4,
+                shadowRadius: 8,
+                elevation: 5,
+              },
+            ]}
+          >
+            <ThemedText
+              type="subtitle"
+              style={[styles.subtitle, { color: "#252728" }]}
+            >
+              Patrocinadores
+            </ThemedText>
 
             <Image
               source={require("@/assets/images/patrocinadores.jpg")}
@@ -227,7 +220,6 @@ const styles = StyleSheet.create({
   phoneHeader: {
     paddingVertical: 12,
     paddingHorizontal: 16,
-    backgroundColor: "#f0f0f0",
     borderRadius: 8,
     marginTop: 16,
   },
@@ -238,13 +230,11 @@ const styles = StyleSheet.create({
   },
   phoneListContainer: {
     padding: 16,
-    backgroundColor: "#fff",
     borderRadius: 16,
     shadowOpacity: 0.4,
     shadowRadius: 8,
     marginTop: 8,
     borderWidth: 1,
-    borderColor: "#ddd",
   },
 
   mapHeader: {
