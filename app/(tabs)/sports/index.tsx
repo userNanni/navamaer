@@ -54,8 +54,11 @@ export default function Podium() {
           overflow: "visible",
         }}
       >
-        <ThemedText style={{ padding: 32 }} type="title">
-          Resultados por Modalidade
+        <ThemedText
+          style={{ padding: 32, textAlign: "center", width: "100%" }}
+          type="title"
+        >
+          Resultados
         </ThemedText>
 
         {sports.length == 0 ? (

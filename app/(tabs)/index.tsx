@@ -5,6 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Modal,
+  Button,
 } from "react-native";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
@@ -21,11 +22,12 @@ import { DataTable } from "react-native-paper";
 
 import { Collapsible } from "@/components/Collapsible";
 import { map } from "ramda";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function HomeScreen() {
   const safeArea = useSafeAreaFrame();
 
-  const [mapModalVisible, setMapModalVisible] = useState(false);
+/*   const [mapModalVisible, setMapModalVisible] = useState(false); */
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -80,13 +82,34 @@ export default function HomeScreen() {
               localizada em Pirassununga - SP, de 19 a 26 de Julho de 2024.
             </ThemedText>
           </ThemedView>
-          <Modal
+          {/*  <Modal
             visible={mapModalVisible}
             animationType="slide"
             transparent={true}
-            style={{}}
           >
-            <ThemedView>
+            <ThemedView
+              style={{
+                position: "absolute",
+                top: "50%",
+                width: safeArea.width,
+                paddingVertical: 16,
+              }}
+            >
+              <TouchableOpacity
+                onPress={() => setMapModalVisible(false)}
+                style={{
+                  alignSelf: "flex-end",
+                  height: 30,
+                  width: 30,
+                  marginRight: 16,
+                }}
+              >
+                <Ionicons
+                  name="close"
+                  color={colorReactiveInverted}
+                  size={30}
+                />
+              </TouchableOpacity>
               <Image
                 source={require("@/assets/images/mapa&wifi.png")}
                 style={{
@@ -98,14 +121,14 @@ export default function HomeScreen() {
                 }}
               />
             </ThemedView>
-          </Modal>
+          </Modal> */}
           <Collapsible title={"Mapa"}>
-            <TouchableOpacity onPress={() => setMapModalVisible(true)}>
+            {/* <TouchableOpacity onPress={() => setMapModalVisible(true)}> */}
               <Image
                 source={require("@/assets/images/mapa&wifi.png")}
                 style={styles.mapImage}
               />
-            </TouchableOpacity>
+            {/* </TouchableOpacity> */}
           </Collapsible>
           <Collapsible title={"Telefones Úteis"}>
             <ThemedView
