@@ -20,12 +20,14 @@ import { useSafeAreaFrame } from "react-native-safe-area-context";
 import { WebView } from "react-native-webview";
 import { DataTable } from "react-native-paper";
 
+import { Ionicons } from "@expo/vector-icons";
+
 import { Collapsible } from "@/components/Collapsible";
 
 export default function HomeScreen() {
   const safeArea = useSafeAreaFrame();
 
-  /*   const [mapModalVisible, setMapModalVisible] = useState(false); */
+  const [mapModalVisible, setMapModalVisible] = useState(false);
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -80,55 +82,56 @@ export default function HomeScreen() {
               localizada em Pirassununga - SP, de 19 a 26 de Julho de 2024.
             </ThemedText>
           </ThemedView>
-          {/*  <Modal
+          <Modal
             visible={mapModalVisible}
             animationType="slide"
             transparent={true}
           >
             <ThemedView
               style={{
+                borderRadius: 16,
+                backgroundColor: colorReactive,
                 position: "absolute",
-                top: "50%",
+                top: "58%",
                 width: safeArea.width,
                 paddingVertical: 16,
               }}
             >
-              <TouchableOpacity
-                onPress={() => setMapModalVisible(false)}
-                style={{
-                  alignSelf: "flex-end",
-                  height: 30,
-                  width: 30,
-                  marginRight: 16,
-                }}
-              >
-                <Ionicons
-                  name="close"
-                  color={colorReactiveInverted}
-                  size={30}
-                />
-              </TouchableOpacity>
+              <ThemedView style={{ backgroundColor: colorReactive }}>
+                <TouchableOpacity
+                  onPress={() => setMapModalVisible(false)}
+                  style={{
+                    alignSelf: "flex-end",
+                    marginRight: 16,
+                    paddingBottom: 16,
+                  }}
+                >
+                  <Ionicons
+                    name="close"
+                    color={colorReactiveInverted}
+                    size={30}
+                  />
+                </TouchableOpacity>
+              </ThemedView>
+
               <Image
                 source={require("@/assets/images/mapa&wifi.png")}
                 style={{
-                  height: safeArea.height / 2,
+                  top: 0,
+                  height: safeArea.height / 3,
                   width: "100%",
                   objectFit: "scale-down",
-                  alignContent: "center",
-                  justifyContent: "center",
                 }}
               />
             </ThemedView>
-          </Modal> */}
+          </Modal>
           <Collapsible title={"Mapa"}>
-            {/* <TouchableOpacity onPress={() => setMapModalVisible(true)}> */}
-
-            <Image
-              source={require("@/assets/images/mapa&wifi.png")}
-              style={[styles.mapImage]}
-            />
-
-            {/* </TouchableOpacity> */}
+            <TouchableOpacity onPress={() => setMapModalVisible(true)}>
+              <Image
+                source={require("@/assets/images/mapa&wifi.png")}
+                style={[styles.mapImage]}
+              />
+            </TouchableOpacity>
           </Collapsible>
           <Collapsible title={"Telefones Úteis"}>
             <ThemedView
