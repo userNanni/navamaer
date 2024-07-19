@@ -103,19 +103,6 @@ const cronogramaData = [
 
 export default function HomeScreen() {
   const safeArea = useSafeAreaFrame();
-  const [showPhones, setShowPhones] = useState(false);
-
-  const togglePhones = () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setShowPhones(!showPhones);
-  };
-
-  const [showMap, setShowMap] = useState(false);
-
-  const toggleMap = () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setShowMap(!showMap);
-  };
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -197,6 +184,29 @@ export default function HomeScreen() {
               </ThemedText>
               <ThemedText>
                 Águia (autorização de acesso nos portões) – (19) 3565-7812
+              </ThemedText>
+            </ThemedView>
+          </Collapsible>
+          <Collapsible title={"suporte aos atletas"}>
+            <ThemedView
+              style={{
+                paddingVertical: 6,
+                paddingHorizontal: 12,
+                borderRadius: 12,
+                shadowOpacity: 0.4,
+                shadowRadius: 8,
+                marginTop: 8,
+                borderWidth: StyleSheet.hairlineWidth,
+                borderColor: colorReactiveInverted,
+              }}
+            >
+              <ThemedText type="subtitle">
+                ATENDIMENTOS DA FISIOTERAFIA AFA
+              </ThemedText>
+
+              <ThemedText>
+                * Próximo a academia dos Cadetes. Atendimento destinado apenas
+                aos Cadetes (atletas) da AFA, durante a LVI NAVAMAER.
               </ThemedText>
             </ThemedView>
           </Collapsible>
