@@ -116,7 +116,7 @@ export default function HomeScreen() {
               </ThemedView>
 
               <Image
-                source={require("@/assets/images/mapawifi.png")}
+                source={require("@/assets/images/mapawifi.jpg")}
                 style={{
                   top: 0,
                   height: safeArea.height / 3,
@@ -157,7 +157,7 @@ export default function HomeScreen() {
           <Collapsible title={"Mapa"}>
             <TouchableOpacity onPress={() => setMapModalVisible(true)}>
               <Image
-                source={require("@/assets/images/mapawifi.png")}
+                source={require("@/assets/images/mapawifi.jpg")}
                 style={[styles.mapImage]}
               />
             </TouchableOpacity>
