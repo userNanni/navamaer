@@ -21,13 +21,11 @@ import { WebView } from "react-native-webview";
 import { DataTable } from "react-native-paper";
 
 import { Collapsible } from "@/components/Collapsible";
-import { map } from "ramda";
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function HomeScreen() {
   const safeArea = useSafeAreaFrame();
 
-/*   const [mapModalVisible, setMapModalVisible] = useState(false); */
+  /*   const [mapModalVisible, setMapModalVisible] = useState(false); */
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -124,10 +122,12 @@ export default function HomeScreen() {
           </Modal> */}
           <Collapsible title={"Mapa"}>
             {/* <TouchableOpacity onPress={() => setMapModalVisible(true)}> */}
-              <Image
-                source={require("@/assets/images/mapa&wifi.png")}
-                style={styles.mapImage}
-              />
+
+            <Image
+              source={require("@/assets/images/mapa&wifi.png")}
+              style={[styles.mapImage]}
+            />
+
             {/* </TouchableOpacity> */}
           </Collapsible>
           <Collapsible title={"Telefones Úteis"}>
