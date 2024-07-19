@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Modal,
   Button,
+  Linking,
 } from "react-native";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
@@ -124,6 +125,22 @@ export default function HomeScreen() {
                 }}
               />
             </ThemedView>
+
+            <TouchableOpacity onPress={() => Linking.openURL("https://www.flickr.com/photos/200886996@N06/albums/72177720317879201")}>
+        <ThemedText type="subtitle">Galeria</ThemedText>
+      </TouchableOpacity>
+      <ThemedView
+          style={[
+            {
+              borderBottomColor: colorReactiveInverted,
+              borderBottomWidth: StyleSheet.hairlineWidth,
+              gap: 2,
+              paddingBottom: 8,
+            },
+          ]}
+        ></ThemedView>
+
+
           </Modal>
           <Collapsible title={"Mapa"}>
             <TouchableOpacity onPress={() => setMapModalVisible(true)}>
@@ -133,6 +150,11 @@ export default function HomeScreen() {
               />
             </TouchableOpacity>
           </Collapsible>
+
+
+
+
+
           <Collapsible title={"Telefones Úteis"}>
             <ThemedView
               style={{
@@ -290,7 +312,16 @@ export default function HomeScreen() {
               </ThemedText>
             </ThemedView>
           </Collapsible>
-
+          <ThemedView
+          style={[
+            {
+              borderBottomColor: colorReactiveInverted,
+              borderBottomWidth: StyleSheet.hairlineWidth,
+              gap: 2,
+              paddingBottom: 8,
+            },
+          ]}
+        ></ThemedView>
           <ThemedView
             style={[
               styles.calendarContainer,

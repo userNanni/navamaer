@@ -63,7 +63,9 @@ export default function Article() {
         >
           <ThemedText style={[styles.titleContainer]} type="subtitle">
             {title}
+
           </ThemedText>
+          
           <ThemedText type="subtitle">{subtitle}</ThemedText>
           <ThemedText>{date}</ThemedText>
         </ThemedView>
