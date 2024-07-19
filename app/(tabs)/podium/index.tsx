@@ -95,7 +95,7 @@ export default function Podium() {
           type="title"
           style={{ paddingHorizontal: 32, paddingTop: 32 }}
         >
-          Pódio
+          Ranking de Medalhas
         </ThemedText>
         <ThemedView style={{ flex: 1, height: "100%", marginBottom: 32 }}>
           <FlashList

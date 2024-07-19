@@ -68,6 +68,7 @@ export default function News() {
                   body: item.body,
                   updated: item.updated,
                   key: item.id,
+                  date: item.publicacao,
                 },
               }}
             >

@@ -55,7 +55,7 @@ export default function Podium() {
         }}
       >
         <ThemedText style={{ padding: 32 }} type="title">
-          Esportes
+          Resultados por Modalidade
         </ThemedText>
 
         {sports.length == 0 ? (
