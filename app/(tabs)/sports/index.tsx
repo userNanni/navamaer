@@ -16,6 +16,7 @@ import { colorReactive, colorReactiveInverted } from "@/constants/Colors";
 import Loading from "@/components/Loading";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 
+
 const pb = new PocketBase(PBLink);
 
 export default function Podium() {
