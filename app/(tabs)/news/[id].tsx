@@ -11,7 +11,7 @@ import { Colors, theme, colorReactiveInverted } from "@/constants/Colors";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 export default function Article() {
-  const { collectionId, id, topic, img, title, author, body, updated, date } =
+  const { collectionId, id, topic, img, title, author, body, updated, date, subtitle } =
     useLocalSearchParams<newsTypes>();
 
   const safeArea = useSafeAreaFrame();
@@ -64,6 +64,7 @@ export default function Article() {
           <ThemedText style={[styles.titleContainer]} type="subtitle">
             {title}
           </ThemedText>
+          <ThemedText type="subtitle">{subtitle}</ThemedText>
           <ThemedText>{date}</ThemedText>
         </ThemedView>
         <ThemedView style={{ alignContent: "space-evenly" }}>

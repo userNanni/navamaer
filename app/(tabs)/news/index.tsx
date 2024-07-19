@@ -69,6 +69,7 @@ export default function News() {
                   updated: item.updated,
                   key: item.id,
                   date: item.publicacao,
+                  subtitle: item.subtitle,
                 },
               }}
             >
@@ -112,7 +113,7 @@ export default function News() {
                   <ThemedText type="subtitle" style={{ width: "100%" }}>
                     {item?.title}
                   </ThemedText>
-                  <ThemedText
+                  {/*                   <ThemedText
                     style={{
                       alignContent: "flex-start",
                       paddingLeft: 6,
@@ -120,7 +121,7 @@ export default function News() {
                     }}
                   >
                     Autor: {item?.author}
-                  </ThemedText>
+                  </ThemedText> */}
                 </View>
               </View>
             </Link>
