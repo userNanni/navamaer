@@ -131,8 +131,10 @@ export default function HomeScreen() {
 
           </Modal>
 
-          <TouchableOpacity onPress={() => Linking.openURL("https://www.flickr.com/photos/200886996@N06/albums/72177720317879201")}>
+          <TouchableOpacity style = {{alignSelf: "center",paddingHorizontal: 24,paddingVertical: 8, borderRadius: 8, backgroundColor: "#05008d" }} onPress={() => Linking.openURL("https://www.flickr.com/photos/200886996@N06/albums/72177720317879201")}>
         <ThemedText type="subtitle">Galeria</ThemedText>
+
+
       </TouchableOpacity>
       <ThemedView
           style={[
@@ -144,7 +146,7 @@ export default function HomeScreen() {
             },
           ]}
         ></ThemedView>
-        
+
           <Collapsible title={"Mapa"}>
             <TouchableOpacity onPress={() => setMapModalVisible(true)}>
               <Image
