@@ -1,20 +1,20 @@
-import { Image, StyleSheet, useColorScheme } from "react-native";
+import { Image, StyleSheet } from "react-native";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Stack, useLocalSearchParams } from "expo-router";
 import HTMLRender from "react-native-render-html";
-import { Colors } from "@/constants/Colors";
 import { newsTypes } from "@/assets/types_methods/types";
+
+import { Colors, theme, colorReactiveInverted } from "@/constants/Colors";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 export default function Article() {
   const { collectionId, id, topic, img, title, author, body, updated } =
     useLocalSearchParams<newsTypes>();
-  const safeArea = useSafeAreaFrame();
 
-  const theme = useColorScheme();
+  const safeArea = useSafeAreaFrame();
 
   const themeInnerHTMLStyle =
     theme === "light" ? styles.innerHTMLLightTheme : styles.innerHTMLDarkTheme;
@@ -53,10 +53,8 @@ export default function Article() {
       >
         <ThemedView
           style={[
-            theme == "light"
-              ? { borderBottomColor: "#151718" }
-              : { borderBottomColor: "#f2f2f2" },
             {
+              borderBottomColor: colorReactiveInverted,
               borderBottomWidth: StyleSheet.hairlineWidth,
               gap: 2,
               paddingBottom: 8,

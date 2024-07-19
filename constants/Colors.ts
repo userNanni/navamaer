@@ -1,3 +1,5 @@
+import { useColorScheme } from "react-native";
+
 const tintColorLight = "#123859";
 const tintColorDark = "#f2f2f2";
 
@@ -19,3 +21,7 @@ export const Colors = {
     tabIconSelected: tintColorDark,
   },
 };
+
+export const theme = useColorScheme();
+export const colorReactive = theme == "dark" ? "#252728" : "#e2e2e2";
+export const colorReactiveInverted = theme == "dark" ? "#e2e2e2" : "#252728";

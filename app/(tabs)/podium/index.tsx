@@ -1,14 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  View,
-  useColorScheme,
-  Image,
-  ActivityIndicator,
-} from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import { Link } from "expo-router";
-
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { FlashList } from "@shopify/flash-list";
 
@@ -23,16 +15,16 @@ import {
   escolasTypes,
   pointsTypes,
 } from "@/assets/types_methods/types";
+
+import { colorReactive, colorReactiveInverted } from "@/constants/Colors";
+import Loading from "@/components/Loading";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 const pb = new PocketBase(PBLink);
 
 export default function Podium() {
   const safeArea = useSafeAreaFrame();
-  const theme = useColorScheme();
   const [loaded, setLoaded] = useState(false);
-  const colorReactive = theme == "dark" ? "#252728" : "#e2e2e2";
-  const colorReactiveInverted = theme == "dark" ? "#e2e2e2" : "#252728";
 
   const fetchData = async () => {
     try {
@@ -167,31 +159,6 @@ export default function Podium() {
       </ParallaxScrollView>
     );
   } else {
-    return (
-      <ThemedView
-        style={{
-          alignItems: "center",
-          justifyContent: "center",
-          width: safeArea.width,
-          height: safeArea.height,
-        }}
-      >
-        <ActivityIndicator size="large" color={colorReactive} />
-      </ThemedView>
-    );
+    return <Loading />;
   }
 }
-
-const styles = StyleSheet.create({
-  headerImage: {
-    marginTop: 40,
-    color: "#808080",
-    justifyContent: "center",
-    alignSelf: "center",
-  },
-  titleContainer: {
-    flexDirection: "row",
-    gap: 8,
-  },
-  stepContainer: {},
-});
