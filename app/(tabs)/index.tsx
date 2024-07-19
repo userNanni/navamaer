@@ -13,7 +13,8 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Colors, colorReactiveInverted, theme } from "@/constants/Colors";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import { WebView } from "react-native-webview";
+
 import { Collapsible } from "@/components/Collapsible";
 
 if (
@@ -22,7 +23,6 @@ if (
 ) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
-
 
 const cronogramaData = [
   "- sexta-feira, 19 de julho",
@@ -101,7 +101,6 @@ const cronogramaData = [
   "11:30h Almoço de Confraternização (SOMENTE PÚBLICO INTERNO)",
   "13:30h Regresso das Delegações",
 ];
-
 
 export default function HomeScreen() {
   const safeArea = useSafeAreaFrame();
@@ -203,35 +202,28 @@ export default function HomeScreen() {
             </ThemedView>
           </Collapsible>
 
-          <Collapsible title={"Cronograma"}>
-              <ThemedView
-                style={{
-                  paddingVertical: 6,
-                  paddingHorizontal: 12,
-                  borderRadius: 12,
-                  shadowOpacity: 0.4,
-                  shadowRadius: 8,
-                  marginTop: 8,
-                  borderWidth: StyleSheet.hairlineWidth,
-                  borderColor: colorReactiveInverted,
-                }}
-              >
-                {cronogramaData.map((item, index) => (
-                <ThemedText
-                  key={index}
-                  style={[
-                    styles.cronogramaText,
-                    item.startsWith("- ") && styles.boldText,
-                  ]}
-                >
-                  {item}
-                </ThemedText>
-              ))}
-              </ThemedView>
-          </Collapsible>
+          <ThemedView
+            style={[
+              styles.calendarContainer,
+              styles.stepContainer,
+              {
+                shadowColor: colorReactiveInverted,
+                minHeight: safeArea.height / 2,
+              },
+            ]}
+          >
+            <ThemedText type="subtitle" style={styles.subtitle}>
+              Cronograma
+            </ThemedText>
+            <WebView
+              nestedScrollEnabled
+              source={{
+                uri: "https://calendar.google.com/calendar/u/0/embed?height=300&wkst=1&ctz=America/Sao_Paulo&bgcolor=%23ffffff&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&mode=AGENDA&hl=pt_BR&src=bHZpLm5hdmFtYWVyLmFmYUBnbWFpbC5jb20&color=%23039BE5",
+              }}
+              style={styles.calendar}
+            />
+          </ThemedView>
 
-
-          
           <ThemedView
             style={[
               styles.stepContainerPatrocinadores,
@@ -351,6 +343,6 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   boldText: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
