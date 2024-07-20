@@ -193,6 +193,7 @@ export default function HomeScreen() {
                 shadowOpacity: 0.4,
                 shadowRadius: 8,
                 marginTop: 8,
+               
                 borderWidth: StyleSheet.hairlineWidth,
                 borderColor: colorReactiveInverted,
               }}
@@ -210,7 +211,7 @@ export default function HomeScreen() {
                       textAlign: "center",
                     }}
                   >
-                    Local
+                    Sala
                   </DataTable.Title>
                   <DataTable.Title
                     textStyle={{
@@ -235,65 +236,65 @@ export default function HomeScreen() {
                 </DataTable.Header>
                 <DataTable.Row>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
-                    Sala 02-CCAer*
+                    02*
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
-                    20/07/2024
+                    20/07
+                  </DataTable.Cell>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted}}>
+                    16h às 18h
+                  </DataTable.Cell>
+                </DataTable.Row>
+                <DataTable.Row>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted  }}>
+                    02*
+                  </DataTable.Cell>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
+                    21/07                
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
                     16h às 18h
                   </DataTable.Cell>
                 </DataTable.Row>
                 <DataTable.Row>
-                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
-                    Sala 02-CCAer*
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted}}>
+                    02*
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
-                    21/07/2024
-                  </DataTable.Cell>
-                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
-                    16h às 18h
-                  </DataTable.Cell>
-                </DataTable.Row>
-                <DataTable.Row>
-                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
-                    Sala 02-CCAer*
-                  </DataTable.Cell>
-                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
-                    22/07/2024
+                    22/07
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
                     14h às 16h
                   </DataTable.Cell>
                 </DataTable.Row>
                 <DataTable.Row>
-                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
-                    Sala 02-CCAer*
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted}}>
+                    02*
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
-                    23/07/2024
+                    23/07
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
                     8h às 11h
                   </DataTable.Cell>
                 </DataTable.Row>
                 <DataTable.Row>
-                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
-                    Sala 02-CCAer*
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted  }}>
+                    02*
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
-                    23/07/2024
+                    23/07
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
                     12h às 15h
                   </DataTable.Cell>
                 </DataTable.Row>
                 <DataTable.Row>
-                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
-                    Sala 02-CCAer*
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted  }}>
+                    02*
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
-                    24/07/2024
+                    24/07
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
                     8h às 11h
@@ -301,10 +302,10 @@ export default function HomeScreen() {
                 </DataTable.Row>
                 <DataTable.Row>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
-                    Sala 02-CCAer*
+                    02*
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
-                    25/07/2024
+                    25/07
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
                     8h às 11h
@@ -312,7 +313,7 @@ export default function HomeScreen() {
                 </DataTable.Row>
               </DataTable>
               <ThemedText>
-                * Próximo a academia dos Cadetes. Atendimento destinado apenas
+                * Próximo a academia dos Cadetes, no CCAER. Atendimento destinado apenas
                 aos Cadetes (atletas) da AFA, durante a LVI NAVAMAER.
               </ThemedText>
             </ThemedView>
