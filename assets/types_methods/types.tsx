@@ -31,6 +31,8 @@ export interface newsTypes {
   author: string;
   body: any;
   updated: string;
+  publicacao: any;
+  subtitle: any;
 }
 
 export interface sportsTypes {

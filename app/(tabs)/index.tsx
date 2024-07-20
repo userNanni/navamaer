@@ -2,120 +2,33 @@ import React, { useState } from "react";
 import {
   Image,
   StyleSheet,
-  LayoutAnimation,
-  Platform,
-  UIManager,
   ScrollView,
+  TouchableOpacity,
+  Modal,
+  Button,
+  Linking,
 } from "react-native";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { Colors, colorReactiveInverted, theme } from "@/constants/Colors";
+import {
+  Colors,
+  colorReactive,
+  colorReactiveInverted,
+  theme,
+} from "@/constants/Colors";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 import { WebView } from "react-native-webview";
+import { DataTable } from "react-native-paper";
+
+import { Ionicons } from "@expo/vector-icons";
 
 import { Collapsible } from "@/components/Collapsible";
 
-if (
-  Platform.OS === "android" &&
-  UIManager.setLayoutAnimationEnabledExperimental
-) {
-  UIManager.setLayoutAnimationEnabledExperimental(true);
-}
-
-const cronogramaData = [
-  "- sexta-feira, 19 de julho",
-  "05:00h Chegada das Delegações na AFA",
-  "11:30h Almoço (SOMENTE PÚBLICO INTERNO)",
-  "13:30h Reunião de Abertura (1ª parte)",
-  "14:00h Reunião de Abertura (2ª parte)",
-  "15:00h Treinamento para a Cerimônia de Abertura (SOMENTE PÚBLICO INTERNO)",
-  "16:00h Cerimônia de Abertura",
-  "16:45h Futebol (Jogo 1)",
-  "19:15h Evento de Abertura (SOMENTE PÚBLICO INTERNO)",
-  "- sábado, 20 de julho",
-  "06:30h Orientação (Saída dos Ônibus)",
-  "08:00h Esgrima Feminino (Sabre Individual)",
-  "08:00h Esgrima Masculino (Espada Individual)",
-  "08:00h Orientação (Percurso Escola)",
-  "08:00h Pentatlo Militar (Tiro Controlado)",
-  "08:30h Atletismo (Dia 1)",
-  "11:30h Esgrima (Finais)",
-  "14:00h Esgrima (Espada Equipe)",
-  "14:30h Natação",
-  "19:00h Basquetebol (Jogo1 - AFA x AMAN)",
-  "- domingo, 21 de julho",
-  "08:00h Esgrima Feminino (Florete Individual)",
-  "08:00h Esgrima Masculino (Sabre Individual)",
-  "08:00h Pentatlo Militar (Tiro)",
-  "08:30h Atletismo (Dia 2)",
-  "10:30h Esgrima (Finais)",
-  "13:00h Esgrima Feminino (Florete Equipes)",
-  "13:00h Esgrima Masculino (Sabre Equipes)",
-  "14:30h Polo Aquático (Jogo 1: AFA x EN)",
-  "17:00h Culto",
-  "17:00h Espírita",
-  "17:00h Missa",
-  "19:00h Basquetebol (Jogo 2 - EN x Perdedor Jogo 1)",
-  "- segunda-feira, 22 de julho",
-  "06:30h Orientação (Saída dos Ônibus)",
-  "07:00h Judô (Pesagem)",
-  "08:00h Esgrima Feminino (Espada Individual)",
-  "08:00h Orientação (Percurso 1)",
-  "08:00h Esgrima Masculino (FloreteIndividual)",
-  "09:00h Tiro (Pistola de Ar)",
-  "09:00h Pentatlo Militar (Pista de Obstáculos)",
-  "11:30h Esgrima (Finais)",
-  "14:00h Esgrima Masculino (Florete Equipes)",
-  "14:30h Polo Aquático (Jogo 2: AMAN x Perdedor Jogo 1)",
-  "16:00h Futebol (Jogo 2 - AFA x Perdedor Jogo 1)",
-  "19:00h Basquetebol (Jogo 3 - EN x Vencedor Jogo 1)",
-  "- terça-feira, 23 de julho",
-  "07:00h Judô (Repesagem)",
-  "09:00h Pentatlo Militar (Lançamentos de Granadas)",
-  "09:00h Tiro (Carabina de Ar)",
-  "13:30h Judô (Equipes)",
-  "14:30h Polo Aquático (Jogo 3 - AMAN x Vencedor Jogo 1)",
-  "19:00h Voleibol (Jogo 1 - EN x AMAN)",
-  "- quarta-feira, 24 de julho",
-  "06:30h Orientação (Saída dos Ônibus)",
-  "07:00h Judô (Repesagem)",
-  "08:00h Tiro (Fogo Central)",
-  "08:00h Orientação (Percurso 2)",
-  "13:30h Judô (Individual)",
-  "15:00h Pentatlo Militar (Natação Utilitária)",
-  "19:00h Voleibol (Jogo 3)",
-  "- quinta-feira, 25 de julho",
-  "06:30h Orientação (Saída dos Ônibus)",
-  "08:00h Orientação (Percurso Reserva)",
-  "08:00h Tiro (Fuzil Standard)",
-  "09:00h Pentatlo Militar (Cross Country)",
-  "15:00h Triathlon",
-  "16:00h Futebol (Jogo 3 - AFA x Vencedor Jogo 1)",
-  "19:00h Voleibol (Jogo 3 - AFA x Vencedor Jogo 1)",
-  "- sexta-feira, 26 de julho",
-  "08:30h Reunião de Encerramento (SOMENTE PÚBLICO INTERNO)",
-  "09:30h Treinamento da Cerimônia de Encerramento",
-  "10:45h Cerimônia de Encerramento",
-  "11:30h Almoço de Confraternização (SOMENTE PÚBLICO INTERNO)",
-  "13:30h Regresso das Delegações",
-];
-
 export default function HomeScreen() {
   const safeArea = useSafeAreaFrame();
-  const [showPhones, setShowPhones] = useState(false);
 
-  const togglePhones = () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setShowPhones(!showPhones);
-  };
-
-  const [showMap, setShowMap] = useState(false);
-
-  const toggleMap = () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setShowMap(!showMap);
-  };
+  const [mapModalVisible, setMapModalVisible] = useState(false);
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -170,12 +83,86 @@ export default function HomeScreen() {
               localizada em Pirassununga - SP, de 19 a 26 de Julho de 2024.
             </ThemedText>
           </ThemedView>
+          <Modal
+            visible={mapModalVisible}
+            animationType="slide"
+            transparent={true}
+          >
+            <ThemedView
+              style={{
+                borderRadius: 16,
+                backgroundColor: colorReactive,
+                position: "absolute",
+                top: "58%",
+                width: safeArea.width,
+                paddingVertical: 16,
+              }}
+            >
+              <ThemedView style={{ backgroundColor: colorReactive }}>
+                <TouchableOpacity
+                  onPress={() => setMapModalVisible(false)}
+                  style={{
+                    alignSelf: "flex-end",
+                    marginRight: 16,
+                    paddingBottom: 16,
+                  }}
+                >
+                  <Ionicons
+                    name="close"
+                    color={colorReactiveInverted}
+                    size={30}
+                  />
+                </TouchableOpacity>
+              </ThemedView>
+
+              <Image
+                source={require("@/assets/images/mapawifi.jpg")}
+                style={{
+                  top: 0,
+                  height: safeArea.height / 3,
+                  width: "100%",
+                  objectFit: "scale-down",
+                }}
+              />
+            </ThemedView>
+          </Modal>
+
+          <TouchableOpacity
+            style={{
+              alignSelf: "center",
+              paddingHorizontal: 24,
+              paddingVertical: 8,
+              borderRadius: 8,
+              backgroundColor: "#05008d",
+            }}
+            onPress={() =>
+              Linking.openURL(
+                "https://www.flickr.com/photos/200886996@N06/albums/72177720317879201"
+              )
+            }
+          >
+            <ThemedText type="subtitle">Galeria</ThemedText>
+          </TouchableOpacity>
+          <ThemedView
+            style={[
+              {
+                borderBottomColor: colorReactiveInverted,
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                gap: 2,
+                paddingBottom: 8,
+              },
+            ]}
+          ></ThemedView>
+
           <Collapsible title={"Mapa"}>
-            <Image
-              source={require("@/assets/images/mapa.jpg")}
-              style={styles.mapImage}
-            />
+            <TouchableOpacity onPress={() => setMapModalVisible(true)}>
+              <Image
+                source={require("@/assets/images/mapawifi.jpg")}
+                style={[styles.mapImage]}
+              />
+            </TouchableOpacity>
           </Collapsible>
+
           <Collapsible title={"Telefones Úteis"}>
             <ThemedView
               style={{
@@ -200,7 +187,150 @@ export default function HomeScreen() {
               </ThemedText>
             </ThemedView>
           </Collapsible>
-
+          <Collapsible title={"Suporte aos Atletas"}>
+            <ThemedView
+              style={{
+                paddingVertical: 6,
+                paddingHorizontal: 12,
+                borderRadius: 12,
+                shadowOpacity: 0.4,
+                shadowRadius: 8,
+                marginTop: 8,
+               
+                borderWidth: StyleSheet.hairlineWidth,
+                borderColor: colorReactiveInverted,
+              }}
+            >
+              <ThemedText type="subtitle" style={{ textAlign: "center" }}>
+                Atendimentos Fisioterapia AFA
+              </ThemedText>
+              <DataTable style={{ marginVertical: 10, borderRadius: 6 }}>
+                <DataTable.Header style={{ backgroundColor: colorReactive }}>
+                  <DataTable.Title
+                    textStyle={{
+                      color: colorReactiveInverted,
+                      fontSize: 20,
+                      fontWeight: "bold",
+                      textAlign: "center",
+                    }}
+                  >
+                    Sala
+                  </DataTable.Title>
+                  <DataTable.Title
+                    textStyle={{
+                      color: colorReactiveInverted,
+                      fontSize: 20,
+                      fontWeight: "bold",
+                      textAlign: "center",
+                    }}
+                  >
+                    Data
+                  </DataTable.Title>
+                  <DataTable.Title
+                    textStyle={{
+                      color: colorReactiveInverted,
+                      fontSize: 20,
+                      fontWeight: "bold",
+                      textAlign: "center",
+                    }}
+                  >
+                    Horário
+                  </DataTable.Title>
+                </DataTable.Header>
+                <DataTable.Row>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
+                    02*
+                  </DataTable.Cell>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
+                    20/07
+                  </DataTable.Cell>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted}}>
+                    16h às 18h
+                  </DataTable.Cell>
+                </DataTable.Row>
+                <DataTable.Row>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted  }}>
+                    02*
+                  </DataTable.Cell>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
+                    21/07                
+                  </DataTable.Cell>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
+                    16h às 18h
+                  </DataTable.Cell>
+                </DataTable.Row>
+                <DataTable.Row>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted}}>
+                    02*
+                  </DataTable.Cell>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
+                    22/07
+                  </DataTable.Cell>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
+                    14h às 16h
+                  </DataTable.Cell>
+                </DataTable.Row>
+                <DataTable.Row>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted}}>
+                    02*
+                  </DataTable.Cell>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
+                    23/07
+                  </DataTable.Cell>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
+                    8h às 11h
+                  </DataTable.Cell>
+                </DataTable.Row>
+                <DataTable.Row>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted  }}>
+                    02*
+                  </DataTable.Cell>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
+                    23/07
+                  </DataTable.Cell>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
+                    12h às 15h
+                  </DataTable.Cell>
+                </DataTable.Row>
+                <DataTable.Row>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted  }}>
+                    02*
+                  </DataTable.Cell>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
+                    24/07
+                  </DataTable.Cell>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
+                    8h às 11h
+                  </DataTable.Cell>
+                </DataTable.Row>
+                <DataTable.Row>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
+                    02*
+                  </DataTable.Cell>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
+                    25/07
+                  </DataTable.Cell>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
+                    8h às 11h
+                  </DataTable.Cell>
+                </DataTable.Row>
+              </DataTable>
+              <ThemedText>
+                * Próximo a academia dos Cadetes, no CCAER. Atendimento destinado apenas
+                aos Cadetes (atletas) da AFA, durante a LVI NAVAMAER.
+              </ThemedText>
+            </ThemedView>
+          </Collapsible>
+          <ThemedView
+            style={[
+              {
+                borderBottomColor: colorReactiveInverted,
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                gap: 2,
+                paddingBottom: 8,
+              },
+            ]}
+          ></ThemedView>
           <ThemedView
             style={[
               styles.calendarContainer,
