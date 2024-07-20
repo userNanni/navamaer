@@ -275,7 +275,7 @@ export default function Podium() {
                         <ThemedText
                           type="defaultSemiBold"
                           style={{
-                            minWidth: (safeArea.width * 5) / 12,
+                            width: (safeArea.width * 5) / 12,
                             justifyContent: "center",
                             alignContent: "center",
                             textAlign: "center",
@@ -289,7 +289,7 @@ export default function Podium() {
                         <ThemedText
                           type="defaultSemiBold"
                           style={{
-                            minWidth: safeArea.width / 7,
+                            width: safeArea.width / 7,
                             justifyContent: "center",
                             alignContent: "center",
                             textAlign: "center",
@@ -303,7 +303,7 @@ export default function Podium() {
                         <ThemedText
                           type="defaultSemiBold"
                           style={{
-                            minWidth: safeArea.width / 7,
+                            width: safeArea.width / 7,
                             justifyContent: "center",
                             alignContent: "center",
                             textAlign: "center",
@@ -340,7 +340,7 @@ export default function Podium() {
                             </ThemedText>
                             <ThemedText
                               style={{
-                                minWidth: (safeArea.width * 5) / 12,
+                                width: (safeArea.width * 5) / 12,
                                 justifyContent: "center",
                                 alignContent: "center",
                                 textAlign: "center",
@@ -353,7 +353,7 @@ export default function Podium() {
                             </ThemedText>
                             <ThemedText
                               style={{
-                                minWidth: safeArea.width / 7,
+                                width: safeArea.width / 7,
                                 justifyContent: "center",
                                 alignContent: "center",
                                 textAlign: "center",
@@ -366,7 +366,7 @@ export default function Podium() {
                             </ThemedText>
                             <ThemedText
                               style={{
-                                minWidth: safeArea.width / 7,
+                                width: safeArea.width / 7,
                                 justifyContent: "flex-end",
                                 alignContent: "flex-end",
                                 textAlign: "right",
