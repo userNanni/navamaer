@@ -116,7 +116,7 @@ export default function HomeScreen() {
               </ThemedView>
 
               <Image
-                source={require("@/assets/images/mapa&wifi.png")}
+                source={require("@/assets/images/mapawifi.jpg")}
                 style={{
                   top: 0,
                   height: safeArea.height / 3,
@@ -125,40 +125,43 @@ export default function HomeScreen() {
                 }}
               />
             </ThemedView>
-
-        
-
-
           </Modal>
 
-          <TouchableOpacity style = {{alignSelf: "center",paddingHorizontal: 24,paddingVertical: 8, borderRadius: 8, backgroundColor: "#05008d" }} onPress={() => Linking.openURL("https://www.flickr.com/photos/200886996@N06/albums/72177720317879201")}>
-        <ThemedText type="subtitle">Galeria</ThemedText>
-
-
-      </TouchableOpacity>
-      <ThemedView
-          style={[
-            {
-              borderBottomColor: colorReactiveInverted,
-              borderBottomWidth: StyleSheet.hairlineWidth,
-              gap: 2,
-              paddingBottom: 8,
-            },
-          ]}
-        ></ThemedView>
+          <TouchableOpacity
+            style={{
+              alignSelf: "center",
+              paddingHorizontal: 24,
+              paddingVertical: 8,
+              borderRadius: 8,
+              backgroundColor: "#05008d",
+            }}
+            onPress={() =>
+              Linking.openURL(
+                "https://www.flickr.com/photos/200886996@N06/albums/72177720317879201"
+              )
+            }
+          >
+            <ThemedText type="subtitle">Galeria</ThemedText>
+          </TouchableOpacity>
+          <ThemedView
+            style={[
+              {
+                borderBottomColor: colorReactiveInverted,
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                gap: 2,
+                paddingBottom: 8,
+              },
+            ]}
+          ></ThemedView>
 
           <Collapsible title={"Mapa"}>
             <TouchableOpacity onPress={() => setMapModalVisible(true)}>
               <Image
-                source={require("@/assets/images/mapa&wifi.png")}
+                source={require("@/assets/images/mapawifi.jpg")}
                 style={[styles.mapImage]}
               />
             </TouchableOpacity>
           </Collapsible>
-
-
-
-
 
           <Collapsible title={"Telefones Úteis"}>
             <ThemedView
@@ -319,15 +322,15 @@ export default function HomeScreen() {
             </ThemedView>
           </Collapsible>
           <ThemedView
-          style={[
-            {
-              borderBottomColor: colorReactiveInverted,
-              borderBottomWidth: StyleSheet.hairlineWidth,
-              gap: 2,
-              paddingBottom: 8,
-            },
-          ]}
-        ></ThemedView>
+            style={[
+              {
+                borderBottomColor: colorReactiveInverted,
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                gap: 2,
+                paddingBottom: 8,
+              },
+            ]}
+          ></ThemedView>
           <ThemedView
             style={[
               styles.calendarContainer,
