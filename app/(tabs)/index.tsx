@@ -29,6 +29,7 @@ export default function HomeScreen() {
   const safeArea = useSafeAreaFrame();
 
   const [mapModalVisible, setMapModalVisible] = useState(false);
+  const [SCAERModalVisible, setSCAERModalVisible] = useState(false);
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -127,13 +128,64 @@ export default function HomeScreen() {
             </ThemedView>
           </Modal>
 
+          <Modal
+            visible={SCAERModalVisible}
+            animationType="slide"
+            transparent={true}
+          >
+            <ThemedView
+              style={{
+                borderRadius: 16,
+                backgroundColor: colorReactive,
+                position: "absolute",
+                top: "48%",
+                width: safeArea.width,
+                paddingVertical: 16,
+              }}
+            >
+              <ThemedView style={{ backgroundColor: colorReactive }}>
+                <TouchableOpacity
+                  onPress={() => setSCAERModalVisible(false)}
+                  style={{
+                    alignSelf: "flex-end",
+                    marginRight: 16,
+                    paddingBottom: 16,
+                  }}
+                >
+                  <Ionicons
+                    name="close"
+                    color={colorReactiveInverted}
+                    size={30}
+                  />
+                </TouchableOpacity>
+              </ThemedView>
+              <TouchableOpacity
+                onPress={() =>
+                  Linking.openURL(
+                    "https://www.canva.com/design/DAGLA54WNUQ/5EvvWfs2qGm0Fwh6TPvPfw/view"
+                  )
+                }
+              >
+                <Image
+                  source={require("@/assets/images/facilidadeSCAER.jpeg")}
+                  style={{
+                    top: 0,
+                    height: safeArea.height / 2.125,
+                    width: "100%",
+                    objectFit: "scale-down",
+                  }}
+                />
+              </TouchableOpacity>
+            </ThemedView>
+          </Modal>
+
           <TouchableOpacity
             style={{
               alignSelf: "center",
               paddingHorizontal: 24,
               paddingVertical: 8,
               borderRadius: 8,
-              backgroundColor: "#05008d",
+              backgroundColor: colorReactiveInverted,
             }}
             onPress={() =>
               Linking.openURL(
@@ -141,7 +193,9 @@ export default function HomeScreen() {
               )
             }
           >
-            <ThemedText type="subtitle">Galeria</ThemedText>
+            <ThemedText type="subtitle" style={{ color: colorReactive }}>
+              Galeria
+            </ThemedText>
           </TouchableOpacity>
           <ThemedView
             style={[
@@ -159,6 +213,18 @@ export default function HomeScreen() {
               <Image
                 source={require("@/assets/images/mapawifi.jpg")}
                 style={[styles.mapImage]}
+              />
+            </TouchableOpacity>
+          </Collapsible>
+          <Collapsible title={"Facilidades da SCAER"}>
+            <TouchableOpacity onPress={() => setSCAERModalVisible(true)}>
+              <Image
+                source={require("@/assets/images/facilidadeSCAER.jpeg")}
+                style={{
+                  width: "100%",
+                  height: 330,
+                  objectFit: "scale-down",
+                }}
               />
             </TouchableOpacity>
           </Collapsible>
@@ -196,7 +262,7 @@ export default function HomeScreen() {
                 shadowOpacity: 0.4,
                 shadowRadius: 8,
                 marginTop: 8,
-               
+
                 borderWidth: StyleSheet.hairlineWidth,
                 borderColor: colorReactiveInverted,
               }}
@@ -244,23 +310,23 @@ export default function HomeScreen() {
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
                     20/07
                   </DataTable.Cell>
-                  <DataTable.Cell textStyle={{ color: colorReactiveInverted}}>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
                     16h às 18h
                   </DataTable.Cell>
                 </DataTable.Row>
                 <DataTable.Row>
-                  <DataTable.Cell textStyle={{ color: colorReactiveInverted  }}>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
                     02*
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
-                    21/07                
+                    21/07
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
                     16h às 18h
                   </DataTable.Cell>
                 </DataTable.Row>
                 <DataTable.Row>
-                  <DataTable.Cell textStyle={{ color: colorReactiveInverted}}>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
                     02*
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
@@ -271,7 +337,7 @@ export default function HomeScreen() {
                   </DataTable.Cell>
                 </DataTable.Row>
                 <DataTable.Row>
-                  <DataTable.Cell textStyle={{ color: colorReactiveInverted}}>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
                     02*
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
@@ -282,7 +348,7 @@ export default function HomeScreen() {
                   </DataTable.Cell>
                 </DataTable.Row>
                 <DataTable.Row>
-                  <DataTable.Cell textStyle={{ color: colorReactiveInverted  }}>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
                     02*
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
@@ -293,7 +359,7 @@ export default function HomeScreen() {
                   </DataTable.Cell>
                 </DataTable.Row>
                 <DataTable.Row>
-                  <DataTable.Cell textStyle={{ color: colorReactiveInverted  }}>
+                  <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
                     02*
                   </DataTable.Cell>
                   <DataTable.Cell textStyle={{ color: colorReactiveInverted }}>
@@ -316,8 +382,9 @@ export default function HomeScreen() {
                 </DataTable.Row>
               </DataTable>
               <ThemedText>
-                * Próximo a academia dos Cadetes, no CCAER. Atendimento destinado apenas
-                aos Cadetes (atletas) da AFA, durante a LVI NAVAMAER.
+                * Próximo a academia dos Cadetes, no CCAER. Atendimento
+                destinado apenas aos Cadetes (atletas) da AFA, durante a LVI
+                NAVAMAER.
               </ThemedText>
             </ThemedView>
           </Collapsible>

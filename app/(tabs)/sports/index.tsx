@@ -264,7 +264,7 @@ export default function Podium() {
                         <ThemedText
                           type="defaultSemiBold"
                           style={{
-                            width: safeArea.width / 12,
+                            width: safeArea.width / 10,
                             justifyContent: "center",
                             alignContent: "center",
                             textAlign: "center",
@@ -275,7 +275,7 @@ export default function Podium() {
                         <ThemedText
                           type="defaultSemiBold"
                           style={{
-                            width: (safeArea.width * 5) / 12,
+                            width: (safeArea.width * 4) / 10,
                             justifyContent: "center",
                             alignContent: "center",
                             textAlign: "center",
