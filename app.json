@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "navamaer",
-    "slug": "navamaer",
+    "slug": "appnavamaer",
     "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -39,8 +39,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "d82bad32-4b4a-46a7-b243-9219773ca66c"
+        "projectId": "45c6f085-dd61-4e0a-83ab-118cc9a8dc1c"
       }
-    }
+    },
+    "owner": "nantrix23"
   }
 }

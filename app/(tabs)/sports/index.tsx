@@ -264,7 +264,7 @@ export default function Podium() {
                         <ThemedText
                           type="defaultSemiBold"
                           style={{
-                            width: safeArea.width / 10,
+                            width: safeArea.width / 12,
                             justifyContent: "center",
                             alignContent: "center",
                             textAlign: "center",
@@ -275,7 +275,7 @@ export default function Podium() {
                         <ThemedText
                           type="defaultSemiBold"
                           style={{
-                            width: (safeArea.width * 4) / 10,
+                            width: (safeArea.width * 5) / 12,
                             justifyContent: "center",
                             alignContent: "center",
                             textAlign: "center",
@@ -318,7 +318,7 @@ export default function Podium() {
                       <FlashList
                         data={item.resultados}
                         keyExtractor={(item) => item.id.toString()}
-                        estimatedItemSize={8}
+                        estimatedItemSize={10}
                         renderItem={({ item }) => (
                           <ThemedView
                             style={{
@@ -366,10 +366,10 @@ export default function Podium() {
                             </ThemedText>
                             <ThemedText
                               style={{
-                                width: safeArea.width / 7,
+                                width: (safeArea.width *1)/ 6,
                                 justifyContent: "flex-end",
                                 alignContent: "flex-end",
-                                textAlign: "right",
+                                textAlign: "center",
                                 paddingHorizontal: 10,
                                 borderLeftWidth: StyleSheet.hairlineWidth,
                                 borderLeftColor: colorReactiveInverted,
