@@ -197,7 +197,7 @@ export default function HomeScreen() {
               Galeria
             </ThemedText>
           </TouchableOpacity>
-          
+
           <ThemedView
             style={[
               {
@@ -215,13 +215,8 @@ export default function HomeScreen() {
                 source={require("@/assets/images/mapawifi.jpg")}
                 style={[styles.mapImage]}
               />
-
-
-              
             </TouchableOpacity>
-
           </Collapsible>
-
 
           <Collapsible title={"Programação SCAER"}>
             <TouchableOpacity onPress={() => setSCAERModalVisible(true)}>
@@ -234,11 +229,8 @@ export default function HomeScreen() {
                 }}
               />
             </TouchableOpacity>
-
           </Collapsible>
-          
-          
-          
+
           <Collapsible title={"Manual Facilidades SCAER"}>
           <TouchableOpacity 
           onPress={() => Linking.openURL("https://www2.fab.mil.br/afa/navamaer/images/Galeria/01_Avisos_e_Alertas/Manual_Facilidades/NAVAMAER_2024_-_Manual_de_Facilidades_compressed.pdf")
@@ -246,7 +238,7 @@ export default function HomeScreen() {
           }
           >
           <Image
-                source={require("@/assets/images/facilidades.jpg")}
+                source={require("@/assets/images/facilidadeSCAER.jpeg")}
                 style={{
                   width: "80%",
                   height: 200,
@@ -254,18 +246,12 @@ export default function HomeScreen() {
                   
                 }}
               />
-              <ThemedText style={{color:"blue",fontSize: 12}}> Clique para baixar</ThemedText>
+              <ThemedText style={{color:"blue"}}> Clique para baixar</ThemedText>
 
           </TouchableOpacity>
        
           
           </Collapsible>
-
-
-
-          
-
-
 
           <Collapsible title={"Telefones Úteis"}>
             <ThemedView
