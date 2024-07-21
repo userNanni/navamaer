@@ -197,7 +197,7 @@ export default function HomeScreen() {
               Galeria
             </ThemedText>
           </TouchableOpacity>
-          
+
           <ThemedView
             style={[
               {
@@ -215,13 +215,8 @@ export default function HomeScreen() {
                 source={require("@/assets/images/mapawifi.jpg")}
                 style={[styles.mapImage]}
               />
-
-
-              
             </TouchableOpacity>
-
           </Collapsible>
-
 
           <Collapsible title={"Programação SCAER"}>
             <TouchableOpacity onPress={() => setSCAERModalVisible(true)}>
@@ -234,18 +229,17 @@ export default function HomeScreen() {
                 }}
               />
             </TouchableOpacity>
-
           </Collapsible>
-          
-          
-          
-          <Collapsible title={"Manual Facilidades SCAER"}>
-          <TouchableOpacity 
-          onPress={() => Linking.openURL("https://www2.fab.mil.br/afa/navamaer/images/Galeria/01_Avisos_e_Alertas/Manual_Facilidades/NAVAMAER_2024_-_Manual_de_Facilidades_compressed.pdf")
 
-          }
-          >
-          <Image
+          <Collapsible title={"Manual Facilidades SCAER"}>
+            <TouchableOpacity
+              onPress={() =>
+                Linking.openURL(
+                  "https://www2.fab.mil.br/afa/navamaer/images/Galeria/01_Avisos_e_Alertas/Manual_Facilidades/NAVAMAER_2024_-_Manual_de_Facilidades_compressed.pdf"
+                )
+              }
+            >
+              <Image
                 source={require("@/assets/images/facilidadeSCAER.jpeg")}
                 style={{
                   width: "100%",
@@ -253,18 +247,12 @@ export default function HomeScreen() {
                   objectFit: "scale-down",
                 }}
               />
-              <ThemedText style={{color:"blue"}}> Clique para baixar</ThemedText>
-
-          </TouchableOpacity>
-       
-          
+              <ThemedText style={{ color: "blue" }}>
+                {" "}
+                Clique para baixar
+              </ThemedText>
+            </TouchableOpacity>
           </Collapsible>
-
-
-
-          
-
-
 
           <Collapsible title={"Telefones Úteis"}>
             <ThemedView

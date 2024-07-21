@@ -80,33 +80,28 @@ export default function Podium() {
         headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
         headerImage={
           <>
-          
-          <Image
-            source={require("@/assets/images/fundo azul.jpg")}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              alignItems: "center",
-              alignSelf: "center",
-            }}
-          />
-          <Image
-            source={require("@/assets/images/podium.png")}
-            style={{
-              position: "absolute",
-              width: "100%",
-              height: "80%",
-              marginTop: "10%",
-              objectFit: "scale-down",
-              alignItems: "center",
-              alignSelf: "center",
-              
-            }}
-          />
-
-
-
+            <Image
+              source={require("@/assets/images/fundo azul.jpg")}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                alignItems: "center",
+                alignSelf: "center",
+              }}
+            />
+            <Image
+              source={require("@/assets/images/podium.png")}
+              style={{
+                position: "absolute",
+                width: "100%",
+                height: "80%",
+                marginTop: "10%",
+                objectFit: "scale-down",
+                alignItems: "center",
+                alignSelf: "center",
+              }}
+            />
           </>
         }
       >
