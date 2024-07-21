@@ -316,6 +316,7 @@ export default function Podium() {
                         </ThemedText>
                       </ThemedView>
                       <FlashList
+                      
                         data={item.resultados}
                         keyExtractor={(item) => item.id.toString()}
                         estimatedItemSize={20}

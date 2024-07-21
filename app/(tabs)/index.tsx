@@ -238,7 +238,7 @@ export default function HomeScreen() {
           }
           >
           <Image
-                source={require("@/assets/images/facilidadeSCAER.jpeg")}
+                source={require("@/assets/images/facilidades.jpg")}
                 style={{
                   width: "80%",
                   height: 200,
