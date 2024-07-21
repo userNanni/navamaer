@@ -33,6 +33,8 @@ export default function Points() {
     }
   };
 
+
+  
   useEffect(() => {
     fetchData();
   }, []);

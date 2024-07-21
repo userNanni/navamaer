@@ -24,13 +24,16 @@ export default function Article() {
       headerBackgroundColor={{
         light: Colors.light.background,
         dark: Colors.dark.background,
+        
       }}
       headerImage={
         <Image
           source={{
             uri: `https://simplyheron.fly.dev/api/files/${collectionId}/${id}/${img}`,
+            
           }}
           style={[styles.image, { width: safeArea.width }]}
+          
         />
       }
     >
@@ -41,6 +44,7 @@ export default function Article() {
           headerTitleStyle: {
             fontSize: 30,
             fontWeight: "bold",
+            
           },
         }}
       />
@@ -48,7 +52,8 @@ export default function Article() {
         style={{
           gap: 8,
           flexDirection: "column",
-          padding: 32,
+          padding: 30,
+          
         }}
       >
         <ThemedView
@@ -56,8 +61,9 @@ export default function Article() {
             {
               borderBottomColor: colorReactiveInverted,
               borderBottomWidth: StyleSheet.hairlineWidth,
-              gap: 2,
+              gap: 5,
               paddingBottom: 8,
+              
             },
           ]}
         >
@@ -84,7 +90,7 @@ export default function Article() {
 const styles = StyleSheet.create({
   titleContainer: {},
   image: {
-    top: 0,
+    
     left: 0,
     position: "absolute",
     height: "100%",

@@ -50,7 +50,7 @@ export default function Podium() {
   pb.collection("sports").subscribe("*", function () {
     fetchData();
   });
-
+  
   const [sports, setSports] = useState<sportsTypes[]>([]);
   if (loaded) {
     return (
@@ -318,7 +318,7 @@ export default function Podium() {
                       <FlashList
                         data={item.resultados}
                         keyExtractor={(item) => item.id.toString()}
-                        estimatedItemSize={10}
+                        estimatedItemSize={20}
                         renderItem={({ item }) => (
                           <ThemedView
                             style={{
@@ -332,7 +332,7 @@ export default function Podium() {
                                 justifyContent: "center",
                                 alignContent: "center",
                                 textAlign: "center",
-                                paddingHorizontal: 10,
+                                
                               }}
                             >
                               {item.id + 1}

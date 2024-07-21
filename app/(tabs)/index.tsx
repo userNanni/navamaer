@@ -246,14 +246,15 @@ export default function HomeScreen() {
           }
           >
           <Image
-                source={require("@/assets/images/facilidadeSCAER.jpeg")}
+                source={require("@/assets/images/facilidades.jpg")}
                 style={{
-                  width: "100%",
-                  height: 330,
+                  width: "80%",
+                  height: 200,
                   objectFit: "scale-down",
+                  
                 }}
               />
-              <ThemedText style={{color:"blue"}}> Clique para baixar</ThemedText>
+              <ThemedText style={{color:"blue",fontSize: 12}}> Clique para baixar</ThemedText>
 
           </TouchableOpacity>
        
