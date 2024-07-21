@@ -1,5 +1,6 @@
-import { useEffect, useState, useCallback } from "react";
-import { RefreshControl, ScrollView, StyleSheet } from "react-native";
+import { useEffect, useState, useCallback} from "react";
+import React from 'react';
+import { RefreshControl, ScrollView, StyleSheet,TextInput,SafeAreaView } from "react-native";
 
 import { FlashList } from "@shopify/flash-list";
 
@@ -51,7 +52,6 @@ export default function Podium() {
   });
 
   const [sports, setSports] = useState<sportsTypes[]>([]);
-
   if (loaded) {
     return (
       <ScrollView

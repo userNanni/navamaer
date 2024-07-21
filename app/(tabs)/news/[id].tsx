@@ -67,7 +67,7 @@ export default function Article() {
           </ThemedText>
           
           <ThemedText type="subtitle">{subtitle}</ThemedText>
-          <ThemedText>{date}</ThemedText>
+          {/* <ThemedText>{date}</ThemedText> */}
         </ThemedView>
         <ThemedView style={{ alignContent: "space-evenly" }}>
           <HTMLRender

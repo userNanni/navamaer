@@ -240,13 +240,22 @@ export default function HomeScreen() {
           
           
           <Collapsible title={"Manual Facilidades SCAER"}>
-          <ThemedText style={{color: 'blue'}}
+          <TouchableOpacity 
           onPress={() => Linking.openURL("https://www2.fab.mil.br/afa/navamaer/images/Galeria/01_Avisos_e_Alertas/Manual_Facilidades/NAVAMAER_2024_-_Manual_de_Facilidades_compressed.pdf")
 
           }
           >
-          MANUAL
-          </ThemedText>
+          <Image
+                source={require("@/assets/images/facilidadeSCAER.jpeg")}
+                style={{
+                  width: "100%",
+                  height: 330,
+                  objectFit: "scale-down",
+                }}
+              />
+              <ThemedText style={{color:"blue"}}> Clique para baixar</ThemedText>
+
+          </TouchableOpacity>
        
           
           </Collapsible>
