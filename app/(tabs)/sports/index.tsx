@@ -24,6 +24,12 @@ export default function Podium() {
   const [loaded, setLoaded] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
+
+
+
+
+
+
   const fetchData = async () => {
     try {
       const records = await pb.collection("sports").getFullList<sportsTypes>({
@@ -52,6 +58,12 @@ export default function Podium() {
   });
   
   const [sports, setSports] = useState<sportsTypes[]>([]);
+    
+  const [sportsFiltered,setSportsFiltered] =React.useState('');
+
+
+
+
   if (loaded) {
     return (
       <ScrollView
@@ -59,6 +71,25 @@ export default function Podium() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
+         
+    <ThemedView style={{paddingRight:100, paddingLeft: 100, paddingTop: 30}}>
+  
+
+
+      <TextInput
+        style={{borderWidth:1,borderColor: '#000',textAlign:'center'}}
+        placeholder="Busca por modalidade"
+        value={sportsFiltered}
+        onChangeText={setSportsFiltered}
+
+        />
+        
+
+       </ThemedView>
+
+
+
+
         <ThemedView
           style={{
             minHeight: safeArea.height,
@@ -81,8 +112,13 @@ export default function Podium() {
             </ThemedView>
           ) : (
             <FlashList
-              data={sports}
-              estimatedItemSize={20}
+            
+            
+            
+
+            data={sports} //sportsFilteres^
+             
+              estimatedItemSize={30}
               style={{ flex: 1 }}
               renderItem={({ item }) =>
                 item.coletivo ? (
@@ -108,6 +144,7 @@ export default function Podium() {
                         justifyContent: "space-between",
                       }}
                     >
+                       
                       <ThemedText
                         type="subtitle"
                         style={{
@@ -115,6 +152,7 @@ export default function Podium() {
                           justifyContent: "center",
                         }}
                       >
+                  
                         {item.modalidade}
                       </ThemedText>
                       <ThemedText
@@ -126,6 +164,7 @@ export default function Podium() {
                         }}
                       >
                         {item.prova}
+                        
                       </ThemedText>
                     </ThemedView>
                     <ThemedView
@@ -319,7 +358,7 @@ export default function Podium() {
                       
                         data={item.resultados}
                         keyExtractor={(item) => item.id.toString()}
-                        estimatedItemSize={20}
+                        estimatedItemSize={30}
                         renderItem={({ item }) => (
                           <ThemedView
                             style={{
@@ -388,6 +427,9 @@ export default function Podium() {
             />
           )}
         </ThemedView>
+      
+        
+
       </ScrollView>
     );
   } else {
