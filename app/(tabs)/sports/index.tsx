@@ -82,7 +82,7 @@ export default function Podium() {
           ) : (
             <FlashList
               data={sports}
-              estimatedItemSize={20}
+              estimatedItemSize={100}
               style={{ flex: 1 }}
               renderItem={({ item }) =>
                 item.coletivo ? (
