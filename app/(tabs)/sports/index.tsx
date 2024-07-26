@@ -58,11 +58,8 @@ export default function Podium() {
   });
   
   const [sports, setSports] = useState<sportsTypes[]>([]);
-    
-  const [sportsFiltered,setSportsFiltered] =React.useState('');
 
-
-
+  const [sports2,setSports2] =useState("");
 
   if (loaded) {
     return (
@@ -79,12 +76,12 @@ export default function Podium() {
       <TextInput
         style={{borderWidth:1,borderColor: '#000',textAlign:'center'}}
         placeholder="Busca por modalidade"
-        value={sportsFiltered}
-        onChangeText={setSportsFiltered}
+        value = {sports2}
+       
 
         />
-        
-
+      
+    
        </ThemedView>
 
 
@@ -110,20 +107,21 @@ export default function Podium() {
                 Não há competições ainda
               </ThemedText>
             </ThemedView>
+            
           ) : (
+            
+             
+            
             <FlashList
             
-            
-            
-
             data={sports} //sportsFilteres^
              
-              estimatedItemSize={30}
+              estimatedItemSize={10}
               style={{ flex: 1 }}
               renderItem={({ item }) =>
-                item.coletivo ? (
+                  item.coletivo ? (
                   <ThemedView
-                    style={[
+                        style={[
                       {
                         alignSelf: "center",
                         width: safeArea.width - 64,
@@ -135,23 +133,30 @@ export default function Podium() {
                         shadowRadius: 8,
                         elevation: 5,
                       },
-                    ]}
-                  >
+                      
+                    ]}  
+                    
+                  >  
+                  
                     <ThemedView
                       style={{
                         flexDirection: "row",
                         paddingVertical: 6,
                         justifyContent: "space-between",
                       }}
-                    >
+                      
+                    > 
                        
-                      <ThemedText
+                          <ThemedText
                         type="subtitle"
                         style={{
                           alignSelf: "flex-start",
                           justifyContent: "center",
                         }}
+                        
                       >
+
+                        
                   
                         {item.modalidade}
                       </ThemedText>
@@ -173,6 +178,7 @@ export default function Podium() {
                         flexDirection: "row",
                       }}
                     >
+                     
                       <FlashList
                         data={item.resultados}
                         keyExtractor={(item) => item.id.toString()}
@@ -182,7 +188,7 @@ export default function Podium() {
                           flexDirection: "row",
                           flex: 1,
                         }}
-                        estimatedItemSize={2}
+                        estimatedItemSize={4}
                         renderItem={({ item }) =>
                           0 == item.id ? (
                             <ThemedView
@@ -247,6 +253,7 @@ export default function Podium() {
                           )
                         }
                       />
+
                     </ThemedView>
                   </ThemedView>
                 ) : (
@@ -358,7 +365,7 @@ export default function Podium() {
                       
                         data={item.resultados}
                         keyExtractor={(item) => item.id.toString()}
-                        estimatedItemSize={30}
+                        estimatedItemSize={10}
                         renderItem={({ item }) => (
                           <ThemedView
                             style={{
@@ -422,17 +429,31 @@ export default function Podium() {
                       />
                     </ThemedView>
                   </ThemedView>
+                
                 )
+                
+              
               }
+              
             />
+          
+            
+          
+          
           )}
-        </ThemedView>
+          </ThemedView>
+        
       
         
 
       </ScrollView>
     );
+  
   } else {
+    
     return <Loading />;
-  }
+    
 }
+
+}
+
